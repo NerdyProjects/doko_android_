@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/start_action_about"/>
+    
+    <item
+        android:id="@+id/action_load_save_game"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/start_action_load_save_game"/>
+        
+</menu>

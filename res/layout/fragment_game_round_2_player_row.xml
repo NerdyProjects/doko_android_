@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/fragement_game_round_2_player_row">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" >
+
+            <ImageView
+                android:id="@+id/fragment_game_round_2_player_row_player_left_state"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/fragment_game_round_2_player_row_player_left_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fragment_game_round_2_player_row_player_left_points"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/red"
+                android:gravity="center|right"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" >
+
+            <ImageView
+                android:id="@+id/fragment_game_round_2_player_row_player_right_state"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/fragment_game_round_2_player_row_player_right_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fragment_game_round_2_player_row_player_right_points"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/green"
+                android:gravity="center|right"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        android:layout_marginTop="1dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/spacer_gray" />
+
+</LinearLayout>

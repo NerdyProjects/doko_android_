@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginRight="1dp"
+    tools:context=".GameActivity" >
+
+    <LinearLayout
+        android:id="@+id/fragment_game_rounds_infos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+            <TextView
+		        android:id="@+id/fragment_game_round_number"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:text="@string/str_game_add_round_here"
+		        android:textStyle="bold"
+		        android:gravity="center"
+		        android:textColor="@color/gray_dark"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_send" />
+            
+            
+    </LinearLayout>
+
+     <ListView
+         android:id="@+id/fragment_game_round_list"
+         android:layout_width="match_parent"
+         android:layout_height="fill_parent"
+         android:smoothScrollbar="true"
+		 android:fastScrollEnabled="true"
+		 android:keepScreenOn="true"
+		 android:cacheColorHint="#191919"
+		 android:layout_above="@+id/fragment_game_bottom_infos"
+		android:layout_below="@id/fragment_game_rounds_infos" />
+
+    <LinearLayout
+        android:id="@id/fragment_game_bottom_infos"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+		    <View
+		        android:background="@drawable/drop_shadow"
+		        android:layout_width="match_parent"
+		        android:layout_height="1dp"
+		        android:orientation="horizontal" />
+		            
+		    
+		    <LinearLayout
+		        android:background="@color/gray"
+		        android:id="@+id/fragment_game_bottom_infos_content"
+		        android:layout_width="match_parent"
+		        android:layout_height="fill_parent"
+		        android:orientation="horizontal" >
+
+		        <TextView
+		            android:id="@+id/fragment_game_bottom_infos_content_bock_str"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:gravity="center"
+		            android:text="@string/str_bockrounds"
+		            android:textAppearance="?android:attr/textAppearanceSmall" />
+		        
+		        <TextView
+		            android:id="@+id/fragment_game_bottom_infos_content_bock_count"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_marginLeft="4dp"
+		            android:gravity="center"
+		            android:textStyle="bold"
+		            android:textAppearance="?android:attr/textAppearanceMedium" />
+		        
+		        <TextView
+		            android:id="@+id/fragment_game_bottom_infos_content_bock_count_seperator"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:gravity="center"
+		            android:text="@string/str_dp_seperator"
+		            android:textAppearance="?android:attr/textAppearanceSmall" />
+		        
+		       <TextView
+		            android:id="@+id/fragment_game_bottom_infos_content_bock_count_preview"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_marginLeft="8dp"
+		            android:gravity="center"
+		            android:lines="1"
+		            android:ellipsize="marquee"  
+		            android:textStyle="bold"
+		            android:textAppearance="?android:attr/textAppearanceMedium" />
+		            
+		    </LinearLayout>
+            
+    </LinearLayout>
+     
+
+
+</RelativeLayout>

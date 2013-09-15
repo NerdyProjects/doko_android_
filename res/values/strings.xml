@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Doppelkopf</string>
+    <string name="app_version">v2.2</string>  
+    <string name="start_action_about">Über diese App</string>
+    <string name="start_action_load_save_game">Vorheriges Spiel starten</string> 
+    <string name="action_about">Über diese App</string>  
+    <string name="str_new_game">Neues Spiel erstellen</string>
+    <string name="str_start_fun">Doppelkopf</string>
+    <string name="str_player">Spieler</string>
+    <string name="str_player_create">Spieler anlegen</string>
+    <string name="str_player_add">Spieler hinzufügen</string>
+    <string name="str_number_short">Nr.</string>
+    
+    <string name="str_game_settings">Spieleinstellungen</string>
+    <string name="str_change_game_settings">Spieleinstellungen ändern</string>
+    <string name="str_change_game_settings_save">Spieleinstellungen speichern</string>
+    <string name="str_change_game_settings_finish">Spieleinstellungen geändert</string>
+    <string name="str_change_game_settings_save_q">Möchten sie die Spieleinstellungen speichern?</string>
+    <string name="str_change_game_settings_delete_bockrounds">Bockrunden löschen</string>
+    <string name="str_change_game_settings_delete_bockrounds_q">Vorhandene Bockrunden werden überschrieben (gelöscht)</string>    
+    <string name="str_edit_round">Runde bearbeiten</string>
+    <string name="str_edit_round_q">Runde bearbeiten?</string>
+    <string name="str_edit_round_abort_q">Runde bearbeiten abbrechen?</string>
+    <string name="str_edit_round_not_possible">Diese Runde kann nicht bearbeitet werden</string>
+    <string name="str_edit_round_info">Runde bearbeiten durch langes Drücken des Rundeneintrages</string>
+    <string name="str_active_player">Aktive Spieler</string>
+    <string name="str_bock_limit">Limit Bock</string>
+    <string name="str_bock">Bock</string>
+    <string name="str_bockround">Bockrunde</string>
+    <string name="str_bockrounds">Bockrunde(n)</string>
+    <string name="str_bock_preview_on_off">Bockvorschau an/aus</string>
+    <string name="str_bock_preview_not_posible">Bockvorschau nicht vorhanden da das Bocklimit \"0\" ist</string>
+    <string name="str_solo">Solo</string>
+    <string name="str_solo_special">*Solo*</string>
+    <string name="str_start_game">Spiel starten</string>
+    <string name="str_error_player_name">Ungültiger, gleiche oder fehlender Spielername</string>
+    <string name="str_image">Bild</string>
+    <string name="anim_inout">300</string>
+    
+    <string name="str_game">Aktuelles Spiel</string>
+    <string name="str_game_cnt_variant">Zählvariante Punkte</string>
+    <string name="str_game_cnt_variant_normal">Standard</string>
+    <string name="str_game_cnt_variant_lose">Verlierer</string>
+    <string name="str_game_cnt_variant_win">Gewinner</string>
+    <string name="str_game_add_round_here">Neue Runde eintragen (wischen)</string>
+    <string name="str_game_new_round">Neue Runde hinzufügen</string>
+    <string name="str_game_add_new_round">Runde hinzufügen</string>
+    <string name="str_game_round">Runde</string>
+    <string name="str_game_current_round">Aktuelle Runde</string>
+    <string name="str_game_prev_round">Vorherige Runde</string>
+    <string name="str_game_points">Punkte</string>
+    <string name="str_game_points_choose_winner">Wähle: Gewinner(click)</string>
+    <string name="str_game_points_choose_winner_and_suspend">Gewinner (click) + Ausgesetzte/r (long click)</string>
+    <string name="str_game_points_choose_bock">Neue Bockrunden</string>
+    <string name="str_game_switch_list_view">Wechsle Ansicht</string>
+    <string name="str_error_game_new_round_data">Ungültige Werte. Bitte Punkte, Anzahl Gewinner/(Ausgesetzt) prüfen</string>
+        
+    <string name="str_error_exit">Schwere Fehler</string>
+    <string name="str_exit_game">Spiel beenden</string>
+    <string name="str_exit_game_q">Möchten Sie das Spiel wirklich beenden?</string>
+    <string name="str_error_game_start">Fehler: Spiel konnte nicht gestartet werden</string>
+    <string name="str_error_load_game_for_change_game_settings">Fehler: Spieleinstellungen konnten nicht geladen werden</string> 
+
+    <string name="str_dp_seperator">:</string>
+    <string name="str_edit">bearbeiten</string>
+    <string name="str_yes">Ja</string>
+    <string name="str_no">Nein</string>
+    <string name="str_accept">Ok</string>
+    <string name="str_abort">Abbrechen</string>
+    <string name="str_rights">Alle Rechte vorbehalten</string>
+    <string name="str_disclaimer">
+		    Disclaimer of Warranty: \nThis Software (Android-Application) are provided on an "as-is" basis, without warranty of any kind, 
+		    including without limitation the warranties of merchantability, fitness for a particular purpose and 
+		    non-infringement. The entire risk as to the quality and performance of the computations is borne by you. 
+		    Should the results prove to be in error, you assume the entire cost of any required service and repair, 
+		    and any consequential damage. Use at your own risk. Use of the Software for your own personal and private use only. All rights reserved\n\nHaftungsausschluss:\nDiese Software (Android-Applikation) "wie sie ist" wird ohne jegliche Gewährleistung für Funktion, 
+			Korrektheit oder Fehlerfreiheit zur Verfügung gestellt. Für jeden direkten oder indirekten Schaden - 
+			insbesondere Schaden an anderer Software, schaden an Hardware, Schaden durch Nutzungsausfall, 
+			Schaden durch Funktionsuntüchtigkeit oder Fehler der Software, kann der Autor nicht haftbar gemacht werden. 
+			Ausschließlich der Benutzer haftet für die Folgen der Benutzung dieser Software. 
+			Diese Software wurde mit größter Sorgfalt entwickelt, jedoch können Fehler niemals ausgeschlossen werden. 
+			Es kann daher keine Gewähr für die Sicherheit ihrer Daten übernommen werden. Benutzung auf eigene Gefahr.
+			Diese App darf ausschließlich nur von Privatpersonen und nur für private Zwecke benutzt und eingesetzt werden \n 
+			(Druch die Verwendung der Software stimmen sie dem Haftungsausschluss zu)Alle Rechte vorbehalten</string>
+</resources>

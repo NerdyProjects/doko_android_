@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+
+ <!--   <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_action_call"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_add_player"/>
+  --> 
+    <item
+        android:id="@+id/menu_switch_game_list_view"
+        android:icon="@drawable/content_paste"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_game_switch_list_view"/>
+    
+    <item
+        android:id="@+id/menu_bock_preview_on_off"
+        android:icon="@drawable/content_paste"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_bock_preview_on_off"/>
+    
+   <item
+        android:id="@+id/menu_change_game_settings"
+        android:icon="@drawable/content_select_all"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_game_settings"/>
+   
+   <item
+        android:id="@+id/menu_edit_round"
+        android:icon="@drawable/content_paste"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_edit_round"/>
+        
+
+     <item
+        android:id="@+id/menu_exit_game"
+        android:icon="@drawable/content_paste"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/str_exit_game"/>
+
+</menu>

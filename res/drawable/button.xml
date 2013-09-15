@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/button_shadow"></item>
+    <item android:drawable="@drawable/button_style" android:bottom="4px"></item>
+</layer-list>

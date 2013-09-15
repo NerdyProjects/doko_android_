@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="55dp"
+    android:orientation="vertical" 
+    android:paddingBottom="5dp"
+    android:id="@+id/player_entry">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+  
+
+	    <LinearLayout
+	        android:layout_width="48dp"
+	        android:layout_height="48dp"
+	        android:orientation="vertical"
+	        android:background="@color/white" >
+	
+	        <ImageView
+	            android:id="@+id/imageView1"
+	            android:layout_width="match_parent"
+	            android:contentDescription="@string/str_image"
+	            android:scaleType="center"
+	            android:layout_height="match_parent"
+	            android:src="@drawable/social_person" />
+	
+	    </LinearLayout>
+	    
+	    <View 
+			android:layout_width="1dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/white"    />
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:weightSum="1" >
+	
+	        <LinearLayout
+	            android:layout_width="0dip"
+	            android:layout_height="match_parent"
+	            android:layout_weight="0.8"
+	            android:orientation="horizontal" >
+	            
+	            <TextView
+	                android:id="@+id/str_front"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:paddingRight="5dp"
+	                android:text=""
+	                android:gravity="center|right"
+	                android:textAppearance="?android:attr/textAppearanceMedium"
+	                android:textColor="@color/black"
+	                android:textStyle="bold" />
+	
+	            <AutoCompleteTextView
+	                android:id="@+id/player_entry_auto_complete"
+	                android:layout_width="fill_parent"
+	                android:layout_height="wrap_content"
+	                android:ems="10"
+	                android:text="" >
+	
+	                <requestFocus />
+	            </AutoCompleteTextView>
+	
+	        </LinearLayout>
+	
+	        <ImageView
+	            android:id="@+id/player_entry_remove"
+	            android:layout_width="0dp"
+	            android:layout_height="match_parent"
+	            android:scaleType="center"
+	            android:clickable="true"
+	            android:layout_weight="0.2"
+	            android:visibility="invisible"
+	             android:contentDescription="@string/str_image"
+	            android:src="@drawable/content_remove" />
+	        
+	    </LinearLayout>
+  </LinearLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/spacer_gray" />
+
+</LinearLayout>
