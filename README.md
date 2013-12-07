@@ -4,7 +4,7 @@ doko_android_
 Wer der App weiterentwickeln möchte kann dies gerne tun. 
 Ich könnte dann die App neu kompilieren und in den PlayStore stellen.
 
-Als Entwickler wirst du dann mit im Beschreibungstext im PlayStore erwähnt (wenn du das möchtest mit z.B. Name - Email)
+Als Entwickler wirst du dann mit im Beschreibungstext im PlayStore erwähnt (wenn du das möchtest mit z.B. Name - Email).
 
 
 Deinen Code stellst du  mir damit frei zur Verfügung und stimmst dem zu das ich diesen uneingeschränkt verwenden darf.
