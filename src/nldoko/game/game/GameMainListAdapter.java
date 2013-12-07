@@ -84,6 +84,8 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     		if(mGame.getPlayerCount() == 4) v = mInflater.inflate(R.layout.fragment_game_round_view_table_4_player, parent,false);
     		else if(mGame.getPlayerCount() == 5) v = mInflater.inflate(R.layout.fragment_game_round_view_table_5_player, parent,false);
     		else if(mGame.getPlayerCount() == 6) v = mInflater.inflate(R.layout.fragment_game_round_view_table_6_player, parent,false);
+    		else if(mGame.getPlayerCount() == 7) v = mInflater.inflate(R.layout.fragment_game_round_view_table_7_player, parent,false);
+    		else if(mGame.getPlayerCount() == 8) v = mInflater.inflate(R.layout.fragment_game_round_view_table_8_player, parent,false);
     	}
     	else{
     		if(mGame.getPlayerCount() == 4 && v.getId() != R.id.fragment_game_round_view_table_4_player)
@@ -92,6 +94,10 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     			v = mInflater.inflate(R.layout.fragment_game_round_view_table_5_player, parent,false);
     		else if(mGame.getPlayerCount() == 6 && v.getId() != R.id.fragment_game_round_view_table_6_player)
     			v = mInflater.inflate(R.layout.fragment_game_round_view_table_6_player, parent,false);
+    		else if(mGame.getPlayerCount() == 7 && v.getId() != R.id.fragment_game_round_view_table_7_player)
+    			v = mInflater.inflate(R.layout.fragment_game_round_view_table_7_player, parent,false);
+    		else if(mGame.getPlayerCount() == 8 && v.getId() != R.id.fragment_game_round_view_table_8_player)
+    			v = mInflater.inflate(R.layout.fragment_game_round_view_table_8_player, parent,false);
     	}
     	
 		if(v ==  null || DokoData.mTvTablePlayerName.length < mGame.getPlayerCount()) return v;

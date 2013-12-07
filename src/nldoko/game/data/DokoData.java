@@ -6,7 +6,7 @@ import nldoko.game.R;
 
 public class DokoData {
 	
-	public static final int MAX_PLAYER = 6;
+	public static final int MAX_PLAYER = 8;
 	public static final int MAX_ACTIVE_PLAYER = 5;
 	public static final int MIN_PLAYER = 4;
 	
@@ -48,7 +48,9 @@ public class DokoData {
 			R.id.fragment_game_round_view_table_player_3,
 			R.id.fragment_game_round_view_table_player_4,
 			R.id.fragment_game_round_view_table_player_5,
-			R.id.fragment_game_round_view_table_player_6,	
+			R.id.fragment_game_round_view_table_player_6,
+			R.id.fragment_game_round_view_table_player_7,
+			R.id.fragment_game_round_view_table_player_8,
 	};	
 	
 	public static final String str_round_type_win_solo = "Solo gewonnen";
@@ -68,7 +70,8 @@ public class DokoData {
 	public static final String GAME_CNT_VARIANT_KEY 	= "GAME_CNT_VARIANT";
 	public static final String ROUND_POINTS_KEY 		= "ROUND_POINTS";
 	
-	public static final String[] PLAYERS_KEY  = {"PLAYER_1","PLAYER_2","PLAYER_3","PLAYER_4","PLAYER_5","PLAYER_6"};
+	public static final String[] PLAYERS_KEY  = {"PLAYER_1","PLAYER_2","PLAYER_3","PLAYER_4",
+												 "PLAYER_5","PLAYER_6","PLAYER_7","PLAYER_8"};
 	
 
 

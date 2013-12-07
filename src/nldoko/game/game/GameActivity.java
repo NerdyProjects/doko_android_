@@ -220,6 +220,8 @@ public class GameActivity extends FragmentActivity  {
 	    	mGame.getPlayer(3).setName("P4");
 	    	mGame.getPlayer(4).setName("P5");
 	    	mGame.getPlayer(5).setName("P6");
+	    	mGame.getPlayer(5).setName("P7");
+	    	mGame.getPlayer(5).setName("P8");
         }
         return mGame;
     }
@@ -404,8 +406,7 @@ public class GameActivity extends FragmentActivity  {
 			
 			if(mGame.getPlayerCount() == 5 && i == 2){
 				mLl.removeView(mTv);
-			}
-			else{
+			} else{
 				mTv.setText(mGame.getPlayer(i*2+1).getName());
 				mTv.setOnClickListener(mAddRoundPlayernameClickListener);
 				mGameAddRoundPlayer.add(mTv);
@@ -505,13 +506,13 @@ public class GameActivity extends FragmentActivity  {
 				return;
 			}
 			
-			/*for(int i=0;i<mWinnerList.length;i++){
+			for(int i=0;i<mWinnerList.length;i++){
 				Log.d(TAG,"i:"+i+" win: "+mWinnerList[i]+"~ suspend: "+mSuspendList[i]);
-			}*/
+			}
 			
-			//Log.d(TAG,mGame.toString());
+			Log.d(TAG,mGame.toString());
 			mGame.addNewRound(getNewRoundPoints(),isNewBockRoundSet(),mWinnerList,mSuspendList);
-			//Log.d(TAG,mGame.toString());		
+			Log.d(TAG,mGame.toString());		
 			notifyDataSetChanged();
 			 
 			
@@ -543,6 +544,8 @@ public class GameActivity extends FragmentActivity  {
 			case 4: mLl = (LinearLayout) mInflater.inflate(R.layout.fragment_game_round_view_table_4_player_header, null); break;
 			case 5: mLl = (LinearLayout) mInflater.inflate(R.layout.fragment_game_round_view_table_5_player_header, null); break;
 			case 6: mLl = (LinearLayout) mInflater.inflate(R.layout.fragment_game_round_view_table_6_player_header, null); break;
+			case 7: mLl = (LinearLayout) mInflater.inflate(R.layout.fragment_game_round_view_table_7_player_header, null); break;
+			case 8: mLl = (LinearLayout) mInflater.inflate(R.layout.fragment_game_round_view_table_8_player_header, null); break;
 		}
 		if(mLl ==  null || DokoData.mTvTablePlayerName.length < mGame.getPlayerCount()) return;
 		
