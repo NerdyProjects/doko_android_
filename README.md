@@ -9,7 +9,6 @@ Als Entwickler wirst du dann mit im Beschreibungstext im PlayStore erwähnt (wen
 
 Deinen Code stellst du  mir damit frei zur Verfügung und stimmst dem zu das ich diesen uneingeschränkt verwenden darf.
 
-
 ====
 
 Verwendung des Quellcodes nur für FREIE & KOSTENLOSE Software/Applikationen/Apps gestattet, 
