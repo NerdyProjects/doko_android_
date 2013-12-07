@@ -176,7 +176,7 @@ public class ChangeGameSettingActivity extends Activity {
     	
     	mSelction = mSpActivePlayer.getSelectedItemPosition();
     	mActivePlayerArrayList.clear();
-    	for(int k=DokoData.MIN_PLAYER;k<=mPlayerCnt && k<DokoData.MAX_ACTIVE_PLAYER;k++) mActivePlayerArrayList.add(k);
+    	for(int k=DokoData.MIN_PLAYER; k <= mPlayerCnt && k <= DokoData.MAX_ACTIVE_PLAYER;k++) mActivePlayerArrayList.add(k);
     	mSPActivePlayerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item,mActivePlayerArrayList);
    	    mSpActivePlayer.setAdapter(mSPActivePlayerArrayAdapter);
    	    

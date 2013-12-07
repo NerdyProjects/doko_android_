@@ -7,7 +7,7 @@ import nldoko.game.R;
 public class DokoData {
 	
 	public static final int MAX_PLAYER = 6;
-	public static final int MAX_ACTIVE_PLAYER = 6;
+	public static final int MAX_ACTIVE_PLAYER = 5;
 	public static final int MIN_PLAYER = 4;
 	
 	public static ArrayList<String> PLAYER_NAMES = new ArrayList<String>();
