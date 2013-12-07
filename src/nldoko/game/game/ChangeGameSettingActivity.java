@@ -6,6 +6,7 @@ import nldoko.game.R;
 import nldoko.game.XML.DokoXMLClass;
 import nldoko.game.classes.GameClass;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -43,7 +44,6 @@ public class ChangeGameSettingActivity extends Activity {
 	private TextView mTvPlayerCnt;
 	private LayoutInflater inflater;
 	private int mPlayerCnt = DokoData.MIN_PLAYER;
-	private AutoCompleteTextView myAutoComplete;
 	private Spinner mSpActivePlayer;
 	private Spinner mSpBockLimit;
 	
@@ -94,7 +94,8 @@ public class ChangeGameSettingActivity extends Activity {
     	GameClass mGame = null;
     	Intent intent = getIntent();
     	Bundle extras = intent.getExtras();
-    	int mActivePlayers,mBockLimit,mPlayerCnt,mGameCntVaraint;
+    	int mActivePlayers,mBockLimit,mPlayerCnt;
+    	GAME_CNT_VARIANT mGameCntVaraint;
     	String mTmp = "";
 
 
@@ -102,7 +103,7 @@ public class ChangeGameSettingActivity extends Activity {
         	mPlayerCnt = extras.getInt(DokoData.PLAYER_CNT_KEY,0);
         	mActivePlayers =  extras.getInt(DokoData.ACTIVE_PLAYER_KEY,0);
         	mBockLimit = extras.getInt(DokoData.BOCKLIMIT_KEY,0);
-        	mGameCntVaraint = extras.getInt(DokoData.GAME_CNT_VARIANT_KEY,DokoData.CNT_VARIANT_NORMAL);
+        	mGameCntVaraint = (GAME_CNT_VARIANT)intent.getSerializableExtra(DokoData.GAME_CNT_VARIANT_KEY);
         	
         	if(mPlayerCnt < DokoData.MIN_PLAYER || mPlayerCnt > DokoData.MAX_PLAYER 
         			|| mActivePlayers > mPlayerCnt || mActivePlayers < DokoData.MIN_PLAYER || 

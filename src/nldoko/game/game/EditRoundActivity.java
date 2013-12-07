@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import nldoko.android.Functions;
 import nldoko.game.R;
 import nldoko.game.data.DokoData;
-import nldoko.game.game.GameActivity.GameAddRoundPlayernameClickListener;
-import nldoko.game.game.GameActivity.GameAddRoundPlayernameLongClickListener;
-import nldoko.game.game.GameActivity.btnAddRoundClickListener;
+import nldoko.game.data.DokoData.PLAYER_ROUND_RESULT_STATE;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -54,9 +52,8 @@ public class EditRoundActivity extends Activity {
     private static GameAddRoundPlayernameLongClickListener mAddRoundPlayernameLongClickListener;
     private static btnEditRoundClickListener mBtnEditRoundClickListener;
 
-	private ArrayList<View> mPlayerViewList = new ArrayList<View>();
 	private static ArrayList<String> mPlayerNames = new ArrayList<String>();
-	private static ArrayList<Integer> mPlayerStates = new ArrayList<Integer>();
+	private static ArrayList<PLAYER_ROUND_RESULT_STATE> mPlayerStates = new ArrayList<PLAYER_ROUND_RESULT_STATE>();
 	
     private static int mWinnerList[] = new int[DokoData.MAX_PLAYER];
     private static int mSuspendList[] = new int[DokoData.MAX_PLAYER];
@@ -65,8 +62,8 @@ public class EditRoundActivity extends Activity {
 	private static int mActivePlayers;
 	private static int mPlayerCnt;
 	private static int mRoundPoints = 0;
-	private static int mPlayerState = DokoData.LOSE_STATE;
 	private static int mBockRound = 0;
+	private static PLAYER_ROUND_RESULT_STATE mPlayerState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +96,7 @@ public class EditRoundActivity extends Activity {
         	
         	for(int k=0;k<mPlayerCnt;k++){
         		mName = extras.getString(DokoData.PLAYERS_KEY[k],"");
-        		mPlayerState = extras.getInt(DokoData.PLAYERS_KEY[k]+"_STATE",DokoData.LOSE_STATE);
+        		mPlayerState = (PLAYER_ROUND_RESULT_STATE)intent.getSerializableExtra(DokoData.PLAYERS_KEY[k]+"_STATE");
         		if(mName == null || mName.length() == 0) return;
         		mPlayerNames.add(mName);
         		mPlayerStates.add(mPlayerState);
@@ -190,9 +187,9 @@ public class EditRoundActivity extends Activity {
 			mTv.setOnClickListener(mAddRoundPlayernameClickListener);
 			if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mAddRoundPlayernameLongClickListener);
 			mGameAddRoundPlayer.add(mTv);
-			if(mPlayerStates.get(i*2) == DokoData.WIN_STATE)
+			if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.WIN_STATE)
 				mTv.performClick();	
-			else if(mPlayerStates.get(i*2) == DokoData.SUSPEND_STATE)
+			else if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE)
 				mTv.performLongClick();
 			
 			mTv = (TextView)mLl.findViewById(R.id.game_add_round_playername_right);
@@ -205,9 +202,9 @@ public class EditRoundActivity extends Activity {
 				mTv.setOnClickListener(mAddRoundPlayernameClickListener);
 				if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mAddRoundPlayernameLongClickListener);
 				mGameAddRoundPlayer.add(mTv);
-				if(mPlayerStates.get(i*2+1) == DokoData.WIN_STATE)
+				if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.WIN_STATE)
 					mTv.performClick();	
-				else if(mPlayerStates.get(i*2+1) == DokoData.SUSPEND_STATE)
+				else if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE)
 					mTv.performLongClick();
 			}
 		}

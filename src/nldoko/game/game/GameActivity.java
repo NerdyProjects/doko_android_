@@ -15,6 +15,8 @@ import nldoko.game.XML.DokoXMLClass;
 import nldoko.game.classes.GameClass;
 import nldoko.game.classes.RoundClass;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
+import nldoko.game.data.DokoData.GAME_VIEW_TYPE;
 import nldoko.game.information.AboutActivity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -72,17 +74,13 @@ public class GameActivity extends FragmentActivity  {
 	
 	private static boolean mBockPreviewOnOff = true;
 	
-	private ImageView mIv;
-	private TextView mTv;
 	private TextView mTvPlayerCnt;
 	private static TextView mTvAddRoundBockPoints;
 	private static LayoutInflater mInflater;
 	private int mPlayerCnt = DokoData.MIN_PLAYER;
-	private AutoCompleteTextView myAutoComplete;
 	private Spinner mSpActivePlayer;
 	private Spinner mSpBockLimit;
 	
-	private Button mBtnStart;
 	private static RadioGroup mNewRoundBockRadioGroup; 
 	private static Button mBtnAddRound;
 	private static EditText mEtNewRoundPoints;
@@ -99,9 +97,7 @@ public class GameActivity extends FragmentActivity  {
     private int mFocusedPage = 0;
 	private static final int mIndexGameMain 		= 0;
 	private static final int mIndexGameNewRound 	= 1;
-	private static final int mIndexGameSettings		= 2;
-    
-    protected static GameClass mGame;
+	protected static GameClass mGame;
     private static int mWinnerList[] = new int[DokoData.MAX_PLAYER];
     private static int mSuspendList[] = new int[DokoData.MAX_PLAYER];
     
@@ -112,9 +108,6 @@ public class GameActivity extends FragmentActivity  {
     private static GameAddRoundPlayernameLongClickListener mAddRoundPlayernameLongClickListener;
     private static btnAddRoundClickListener mBtnAddRoundClickListener;
     
-    private static int ROUND_LIST_VIEW_MODE = DokoData.ROUND_VIEW_DETAIL; //Dafault-Mode
- 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,7 +177,8 @@ public class GameActivity extends FragmentActivity  {
     	GameClass mGame = null;
     	Intent intent = getIntent();
     	Bundle extras = intent.getExtras();
-    	int mActivePlayers,mBockLimit,mPlayerCnt,mGameCntVaraint;
+    	int mActivePlayers,mBockLimit,mPlayerCnt;
+    	GAME_CNT_VARIANT mGameCntVaraint;
     	String mTmp = "";
     	
     	//Log.d(TAG,"getgame");
@@ -200,7 +194,7 @@ public class GameActivity extends FragmentActivity  {
         	mPlayerCnt 		= extras.getInt(DokoData.PLAYER_CNT_KEY,0);
         	mActivePlayers 	= extras.getInt(DokoData.ACTIVE_PLAYER_KEY,0);
         	mBockLimit		= extras.getInt(DokoData.BOCKLIMIT_KEY,0);
-        	mGameCntVaraint = extras.getInt(DokoData.GAME_CNT_VARIANT_KEY,DokoData.CNT_VARIANT_NORMAL);
+        	mGameCntVaraint = (GAME_CNT_VARIANT)intent.getSerializableExtra(DokoData.GAME_CNT_VARIANT_KEY);
         	
         	if(mPlayerCnt < DokoData.MIN_PLAYER || mPlayerCnt > DokoData.MAX_PLAYER 
         			|| mActivePlayers > mPlayerCnt || mActivePlayers < DokoData.MIN_PLAYER
@@ -218,7 +212,7 @@ public class GameActivity extends FragmentActivity  {
         	}
         }
         else{
-        	mGame = new GameClass(5, 4, 1, DokoData.CNT_VARIANT_NORMAL);
+        	mGame = new GameClass(5, 4, 1, GAME_CNT_VARIANT.CNT_VARIANT_NORMAL);
 	    	
         	mGame.getPlayer(0).setName("Johannes");
         	mGame.getPlayer(1).setName("Christoph");
@@ -302,12 +296,12 @@ public class GameActivity extends FragmentActivity  {
 		
 		mLvRoundAdapter = new GameMainListAdapter(rootView.getContext(), mGame.getRoundList(),mGame);
 		mLvRounds.setAdapter(mLvRoundAdapter);
-		mLvRoundAdapter.changeRoundListViewMode(DokoData.ROUND_VIEW_TABLE);
+		mLvRoundAdapter.changeRoundListViewMode(GAME_VIEW_TYPE.ROUND_VIEW_TABLE);
 		mGameRoundsInfoSwipe = (LinearLayout)rootView.findViewById(R.id.fragment_game_rounds_infos);
-		if(mGame != null && mGame.getRoundCount() > 0 && mLvRoundAdapter.getRoundListViewMode() == DokoData.ROUND_VIEW_DETAIL)
+		if(mGame != null && mGame.getRoundCount() > 0 && mLvRoundAdapter.getRoundListViewMode() == GAME_VIEW_TYPE.ROUND_VIEW_DETAIL)
 			mGameRoundsInfoSwipe.removeAllViews();
 		
-		if(mGame != null && mGame.getRoundCount() > 0 && mLvRoundAdapter.getRoundListViewMode() == DokoData.ROUND_VIEW_TABLE){
+		if(mGame != null && mGame.getRoundCount() > 0 && mLvRoundAdapter.getRoundListViewMode() == GAME_VIEW_TYPE.ROUND_VIEW_TABLE){
 			mGameRoundsInfoSwipe.removeAllViews();
 			createTableHeader();
 		}
@@ -496,11 +490,11 @@ public class GameActivity extends FragmentActivity  {
 		@Override
 		public void onClick(View v) {
 			if(mGame.getRoundCount() == 0){
-				if(mLvRoundAdapter.getRoundListViewMode() == DokoData.ROUND_VIEW_TABLE){
+				if(mLvRoundAdapter.getRoundListViewMode() == GAME_VIEW_TYPE.ROUND_VIEW_TABLE){
 					mGameRoundsInfoSwipe.removeAllViews();
 					createTableHeader();
 				}
-				else if(mLvRoundAdapter.getRoundListViewMode() == DokoData.ROUND_VIEW_DETAIL){ 
+				else if(mLvRoundAdapter.getRoundListViewMode() == GAME_VIEW_TYPE.ROUND_VIEW_DETAIL){ 
 					mGameRoundsInfoSwipe.removeAllViews();
 				}
 			}
@@ -786,14 +780,14 @@ public class GameActivity extends FragmentActivity  {
   	public boolean onOptionsItemSelected(MenuItem item){
     	switch(item.getItemId()) {
     		case R.id.menu_switch_game_list_view:
-	    		int mRoundListViewMode = mLvRoundAdapter.getRoundListViewMode();
-	    		if(mRoundListViewMode == DokoData.ROUND_VIEW_DETAIL){
+    			GAME_VIEW_TYPE mRoundListViewMode = mLvRoundAdapter.getRoundListViewMode();
+	    		if(mRoundListViewMode == GAME_VIEW_TYPE.ROUND_VIEW_DETAIL){
 	    			createTableHeader();
-	    			mLvRoundAdapter.changeRoundListViewMode(DokoData.ROUND_VIEW_TABLE);
+	    			mLvRoundAdapter.changeRoundListViewMode(GAME_VIEW_TYPE.ROUND_VIEW_TABLE);
 	    		}
 	    		else{
 	    			mGameRoundsInfoSwipe.removeAllViews();
-	    			mLvRoundAdapter.changeRoundListViewMode(DokoData.ROUND_VIEW_DETAIL);
+	    			mLvRoundAdapter.changeRoundListViewMode(GAME_VIEW_TYPE.ROUND_VIEW_DETAIL);
 	    		}
 	    		
 	    		notifyDataSetChanged();

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import nldoko.game.R;
 import nldoko.game.XML.DokoXMLClass;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 import nldoko.game.information.AboutActivity;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -193,7 +194,7 @@ public class NewGameActivity extends Activity {
 			i.putExtra(DokoData.PLAYER_CNT_KEY, mPlayerCnt);
 			i.putExtra(DokoData.BOCKLIMIT_KEY, mSpBockLimit.getSelectedItemPosition());
 			i.putExtra(DokoData.ACTIVE_PLAYER_KEY, mSpActivePlayer.getSelectedItemPosition()+4);
-			i.putExtra(DokoData.GAME_CNT_VARIANT_KEY, mSpGameCntVariant.getSelectedItemPosition());
+			i.putExtra(DokoData.GAME_CNT_VARIANT_KEY, GAME_CNT_VARIANT.values()[mSpGameCntVariant.getSelectedItemPosition()]);
 
 			startActivity(i);
 		}

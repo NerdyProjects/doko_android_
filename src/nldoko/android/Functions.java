@@ -2,11 +2,8 @@ package nldoko.android;
 
 import java.math.BigDecimal;
 
-import android.util.Log;
 
 public class Functions {
-	
-	private static String TAG = "FUNCTIONS";
 	
 	public static String getFloatAsString(float points){
 		if(points == 0) return "0";

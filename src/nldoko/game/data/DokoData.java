@@ -13,16 +13,32 @@ public class DokoData {
 	public static ArrayList<String> PLAYER_NAMES = new ArrayList<String>();
 	public static final String PLAYER_NAMES_XML = "player_names.xml";
 	
-	public static final int NORMAL = 0;
-	public static final int WIN_SOLO = 1;
-	public static final int LOSE_SOLO = 2;
-	public static final int FIVEPLAYER_3WIN = 3;
-	public static final int FIVEPLAYER_2WIN = 4;
 	
-	public static final int LOSE_STATE = 0;
-	public static final int WIN_STATE = 1;
-	public static final int SUSPEND_STATE = 2;
+	public static enum GAME_RESULT_TYPE {
+		NORMAL, 
+		WIN_SOLO, 
+		LOSE_SOLO, 
+		FIVEPLAYER_3WIN, 
+		FIVEPLAYER_2WIN
+	}
+	
+	public static enum PLAYER_ROUND_RESULT_STATE {
+		LOSE_STATE, 
+		WIN_STATE, 
+		SUSPEND_STATE
+	}
+	
+	
+	public static enum GAME_CNT_VARIANT {
+		CNT_VARIANT_NORMAL,
+		CNT_VARIANT_LOSE,
+		CNT_VARIANT_WIN
+	}
 
+	public static enum GAME_VIEW_TYPE {
+		ROUND_VIEW_DETAIL,
+		ROUND_VIEW_TABLE
+	}
 	
 	public static final Integer[] mPointSuggestions = {1,2,3,4,5,6,7,8,9,10,11,12,14,16,18,20};	
 	
@@ -43,8 +59,6 @@ public class DokoData {
 	
 	public static final String[] GAME_CNT_VARAINT_ARRAY  = {"Standard","Verlierer","Gewinner"};
 	
-	public static final int ROUND_VIEW_DETAIL = 1;
-	public static final int ROUND_VIEW_TABLE  = 2;
 	
 	public static final String CHANGE_GAME_SETTINGS_KEY = "CHANGE_GAME_SETTINGS";
 	public static final String PLAYER_CNT_KEY 			= "PLAYER_CNT";
@@ -56,8 +70,6 @@ public class DokoData {
 	
 	public static final String[] PLAYERS_KEY  = {"PLAYER_1","PLAYER_2","PLAYER_3","PLAYER_4","PLAYER_5","PLAYER_6"};
 	
-	public static final int CNT_VARIANT_NORMAL	= 0;
-	public static final int CNT_VARIANT_LOSE 	= 1;		
-	public static final int CNT_VARIANT_WIN 	= 2;	
+
 
 }

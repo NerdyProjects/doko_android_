@@ -2,8 +2,8 @@ package nldoko.game.classes;
 
 import java.io.Serializable;
 
-import nldoko.game.R;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_RESULT_TYPE;
 
 
 public class RoundClass implements Serializable  {
@@ -13,7 +13,7 @@ public class RoundClass implements Serializable  {
 	private int mID;
 	private int mPoints;
 	private int mBockCount;
-	private int mRoundType;
+	private GAME_RESULT_TYPE mRoundType;
 	String mResultText;
 	
 	
@@ -61,49 +61,49 @@ public class RoundClass implements Serializable  {
 		this.mBockCount = bc;
 	}
 	
-	public int getRoundType(){
+	public GAME_RESULT_TYPE getRoundType(){
 		return mRoundType;
 	}
 	
 	public void setRoundType(int winner_count, int active_player){
 		if(winner_count == 1){
 			//Win solo
-			this.mRoundType = DokoData.WIN_SOLO;
+			this.mRoundType = GAME_RESULT_TYPE.WIN_SOLO;
 			this.setResultText(String.valueOf(this.mPoints+"/"+((active_player-1)*this.mPoints) ));
 		}
 		else if(winner_count == 3 && active_player == 4){
 			//Lose solo
-			this.mRoundType = DokoData.LOSE_SOLO;
+			this.mRoundType = GAME_RESULT_TYPE.LOSE_SOLO;
 			this.setResultText(String.valueOf(this.mPoints+"/"+((active_player-1)*this.mPoints) ));
 		}
 		else if(winner_count == 4 && active_player == 5){
 			//Lose solo
-			this.mRoundType = DokoData.LOSE_SOLO;
+			this.mRoundType = GAME_RESULT_TYPE.LOSE_SOLO;
 			this.setResultText(String.valueOf(this.mPoints+"/"+((active_player-1)*this.mPoints) ));
 		}
 		else if(winner_count == 3 && active_player == 5){
 			//3 win vs. 2 lose
-			this.mRoundType = DokoData.FIVEPLAYER_3WIN;
+			this.mRoundType = GAME_RESULT_TYPE.FIVEPLAYER_3WIN;
 			this.setResultText(String.valueOf(this.mPoints+"/"+((active_player-2)*this.mPoints/2) ));
 		}
 		else if(winner_count == 2 && active_player == 5){
 			//2 win vs. 3 lose
-			this.mRoundType = DokoData.FIVEPLAYER_2WIN;
+			this.mRoundType = GAME_RESULT_TYPE.FIVEPLAYER_2WIN;
 			this.setResultText(String.valueOf(this.mPoints+"/"+((active_player-2)*this.mPoints/2) ));
 		}
 		else{
-			this.mRoundType = DokoData.NORMAL;
+			this.mRoundType = GAME_RESULT_TYPE.NORMAL;
 			this.setResultText(String.valueOf(this.mPoints));
 		}
 	}
 		
 	public String getRoundTypeAsAtring(){
 		switch(mRoundType){
-			case DokoData.LOSE_SOLO:
-			case DokoData.WIN_SOLO:
+			case LOSE_SOLO:
+			case WIN_SOLO:
 				return DokoData.str_round_type_solo;
-			case DokoData.FIVEPLAYER_2WIN:
-			case DokoData.FIVEPLAYER_3WIN:
+			case FIVEPLAYER_2WIN:
+			case FIVEPLAYER_3WIN:
 				return DokoData.str_round_type_3vs2;
 			default:
 				return  DokoData.str_round_type_2vs2;

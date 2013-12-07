@@ -7,6 +7,9 @@ import nldoko.game.R;
 import nldoko.game.classes.GameClass;
 import nldoko.game.classes.RoundClass;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_RESULT_TYPE;
+import nldoko.game.data.DokoData.GAME_VIEW_TYPE;
+import nldoko.game.data.DokoData.PLAYER_ROUND_RESULT_STATE;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,7 +38,7 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     private GameClass mGame;
     private LayoutInflater mInflater;
     private RoundNumberLongClickListerner mRoundNrLongListerner;
-    private int mRoundListViewMode = DokoData.ROUND_VIEW_DETAIL;
+    private GAME_VIEW_TYPE mRoundListViewMode = GAME_VIEW_TYPE.ROUND_VIEW_DETAIL;
    
     public GameMainListAdapter(Context context,ArrayList<RoundClass> roundArrayList, GameClass game) {
         super(context,0, roundArrayList);
@@ -47,19 +50,19 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
         mRoundNrLongListerner = new RoundNumberLongClickListerner();
     }
  
-    public void changeRoundListViewMode(int roundListViewMode){
+    public void changeRoundListViewMode(GAME_VIEW_TYPE roundListViewMode){
     	this.mRoundListViewMode = roundListViewMode;
     }
     
-    public int getRoundListViewMode(){
+    public GAME_VIEW_TYPE getRoundListViewMode(){
     	return this.mRoundListViewMode;
     }
     
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
     	switch(mRoundListViewMode){
-    		case DokoData.ROUND_VIEW_DETAIL: return getRoundViewDetail(position,convertView,parent);
-    		case DokoData.ROUND_VIEW_TABLE: return getRoundViewTable(position,convertView,parent);
+    		case ROUND_VIEW_DETAIL: return getRoundViewDetail(position,convertView,parent);
+    		case ROUND_VIEW_TABLE: return getRoundViewTable(position,convertView,parent);
     		default: return getRoundViewDetail(position,convertView,parent);
     	}
   
@@ -112,7 +115,7 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 		if(mRound.getPoints() == 0) mRoundPoints.setText("-");
 		else mRoundPoints.setText(String.valueOf(mRound.getPoints()));
 		
-		if(mRound.getRoundType() == DokoData.LOSE_SOLO || mRound.getRoundType() == DokoData.WIN_SOLO){
+		if(mRound.getRoundType() == GAME_RESULT_TYPE.LOSE_SOLO || mRound.getRoundType() == GAME_RESULT_TYPE.WIN_SOLO){
 			mRoundPointsSolo.setVisibility(View.VISIBLE);
 			mRoundPointsSolo.setText(String.valueOf(mRound.getPoints()*(mGame.getActivePlayerCount()-1)));
 		}
@@ -191,7 +194,7 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 			mRoundNumber.setText("#"+String.valueOf(mRound.getID()+1));
 		}
 		
-		if(mRound.getRoundType() == DokoData.LOSE_SOLO || mRound.getRoundType() == DokoData.WIN_SOLO)
+		if(mRound.getRoundType() == GAME_RESULT_TYPE.LOSE_SOLO || mRound.getRoundType() == GAME_RESULT_TYPE.WIN_SOLO)
 			mRoundPointsSolo.setText(String.valueOf((mRound.getPoints()*(mGame.getActivePlayerCount()-1))));
 		else mRoundPointsSolo.setText("");
 		
@@ -277,21 +280,21 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				Log.d("roundnr edit yes","round nr:"+roundNumber);
 				Intent i = new Intent(mContext, EditRoundActivity.class);
-				int mPlayerRoundState = DokoData.WIN_STATE;
+				PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
 				for(int k=0;k<mGame.getPlayerCount();k++){
-					mPlayerRoundState = DokoData.WIN_STATE;
+					mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
 					i.putExtra(DokoData.PLAYERS_KEY[k], mGame.getPlayer(k).getName());
 					if(roundNumber == 1){
 						if(mGame.getPlayer(k).getPointHistory(roundNumber-1) < 0)
-							mPlayerRoundState = DokoData.LOSE_STATE;
+							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
 						else if(mGame.getPlayer(k).getPointHistory(roundNumber-1) == 0)
-							mPlayerRoundState = DokoData.SUSPEND_STATE;
+							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
 					}
 					else{
 						if((mGame.getPlayer(k).getPointHistory(roundNumber-1) - mGame.getPlayer(k).getPointHistory(roundNumber-2)) < 0)
-							mPlayerRoundState = DokoData.LOSE_STATE;
+							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
 						else if((mGame.getPlayer(k).getPointHistory(roundNumber-1) - mGame.getPlayer(k).getPointHistory(roundNumber-2)) == 0)
-							mPlayerRoundState = DokoData.SUSPEND_STATE;
+							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
 					}
 					i.putExtra(DokoData.PLAYERS_KEY[k]+"_STATE", mPlayerRoundState);
 				}
@@ -317,8 +320,8 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 			String mTmp = "";
 			TextView mTvRoundPoints = null;
 	    	switch(mRoundListViewMode){
-	    		case DokoData.ROUND_VIEW_DETAIL: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_number); break;
-	    		case DokoData.ROUND_VIEW_TABLE: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_view_table_round_nr); break;
+	    		case ROUND_VIEW_DETAIL: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_number); break;
+	    		case ROUND_VIEW_TABLE: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_view_table_round_nr); break;
 	    		default: return true;
 	    	}
 			

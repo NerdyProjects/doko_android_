@@ -21,6 +21,7 @@ import nldoko.game.classes.GameClass;
 import nldoko.game.classes.PlayerClass;
 import nldoko.game.classes.RoundClass;
 import nldoko.game.data.DokoData;
+import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -70,7 +71,7 @@ public class DokoXMLClass {
     	        
     	        serializer.text("\n\t");
     	        serializer.startTag("", "GameCntVariant");
-    	        serializer.text(Integer.toString(game.getGameCntVariant()));
+    	        serializer.text(game.getGameCntVariant().toString());
     	        serializer.endTag("", "GameCntVariant");
     	        
   
@@ -145,7 +146,8 @@ public class DokoXMLClass {
 	public static GameClass restoreGameStateFromXML(Context c) {
 		int mPID = 0;
 		int mPreID = 1; // 0 = show state
-		int mPlayerCnt = 0, mPreRoundCnt = 0, mBockCount = -1, mActivePlayers = 0, mBockRoundLimit = 0, mGameCntVariant = 0;
+		int mPlayerCnt = 0, mPreRoundCnt = 0, mBockCount = -1, mActivePlayers = 0, mBockRoundLimit = 0;
+		GAME_CNT_VARIANT mGameCntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
 		Float mPoints = (float) 0.0;
 		String mName = "";
 		
@@ -182,12 +184,12 @@ public class DokoXMLClass {
 				mNode = mNodes.item(i);
 				if(mNode.getNodeType() != Node.ELEMENT_NODE) continue;
 				
-				//Log.d(TAG,i+"#"+mNode.getTextContent());
+				Log.d(TAG,i+"#"+mNode.getTextContent());
 				
 				if(mNode.getNodeName().equalsIgnoreCase("PlayerCnt")) mPlayerCnt = Integer.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("ActivePlayers")) mActivePlayers = Integer.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("BockRoundLimit")) mBockRoundLimit = Integer.valueOf(mNode.getTextContent());
-				else if(mNode.getNodeName().equalsIgnoreCase("GameCntVariant")) mGameCntVariant = Integer.valueOf(mNode.getTextContent());
+				else if(mNode.getNodeName().equalsIgnoreCase("GameCntVariant")) mGameCntVariant = GAME_CNT_VARIANT.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("Players")){
 					mNodesTmp = mNode.getChildNodes();
 					for(int t=0; t<mNodesTmp.getLength();t++) {

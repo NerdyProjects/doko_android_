@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import nldoko.game.data.DokoData;
-import android.util.Log;
+import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 
 public class GameClass  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private static int GAME_CNT_VARIANT;
+	private GAME_CNT_VARIANT cntVariant;
 	
 	private ArrayList<PlayerClass> mPlayers;
 	private ArrayList<RoundClass> mRoundList;
@@ -26,10 +26,10 @@ public class GameClass  implements Serializable{
     	this.mPlayerCount = 0;
     	this.mActivePlayerCount = 0;    
     	this.mBockRoundLimit = 0;
-    	this.GAME_CNT_VARIANT = DokoData.CNT_VARIANT_NORMAL;
+    	this.cntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
 	}
 	
-	public GameClass(int playerCount, int activePlayer, int bockLimit, int cntVariant){
+	public GameClass(int playerCount, int activePlayer, int bockLimit, GAME_CNT_VARIANT cntVariant){
 		this.mPlayers = new ArrayList<PlayerClass>();
 		this.mRoundList = new ArrayList<RoundClass>();
 		this.mPreRoundList = new ArrayList<RoundClass>();
@@ -37,16 +37,11 @@ public class GameClass  implements Serializable{
     	this.mActivePlayerCount = activePlayer;    
     	this.mBockRoundLimit = bockLimit;
     	
-    	this.GAME_CNT_VARIANT = cntVariant;
+    	this.cntVariant = cntVariant;
     	
     	for(int i=0;i<getMAXPlayerCount();i++){
     		this.mPlayers.add(new PlayerClass(i));
-    	}
-    	
-    	/*for(int i=0;i<(getMAXPlayerCount()*mBockRoundLimit);i++){
-    		this.mPreRoundList.add(new RoundClass(i,0,0)); 
-    	}*/
-    	
+    	} 	
 
 	}
 	
@@ -56,15 +51,10 @@ public class GameClass  implements Serializable{
 
 	}
 	
-	public int getGameCntVariant(){
-		return GAME_CNT_VARIANT;
+	public void setGameCntVariant(GAME_CNT_VARIANT variant){
+		this.cntVariant = variant;
 	}
-	
-	public void setGameCntVariant(int gameCntVariant){
-		GAME_CNT_VARIANT = gameCntVariant;
-	}
-	
-	
+		
 	public PlayerClass getPlayer(int pos){
 		return this.mPlayers.get(pos);
 	}
@@ -77,11 +67,7 @@ public class GameClass  implements Serializable{
 	public int getRoundCount(){
 		return this.mRoundList.size();
 	}
-	
-	private RoundClass getLastRound(){
-		return this.mRoundList.get(mRoundList.size()-1);
-	}
-	
+		
 	public ArrayList<RoundClass> getRoundList(){
 		return mRoundList;
 	}
@@ -93,14 +79,7 @@ public class GameClass  implements Serializable{
 	public ArrayList<RoundClass> mTmp(){
 		return mPreRoundList;
 	}
-	
-	private RoundClass getRound(int pos){
-		if(pos >= mRoundList.size()) return null;
-		return this.mRoundList.get(pos);
-	}
 		
-	private String TAG = "GameClass";
-	
 	public RoundClass getNewRound(){
 		if((mBockRoundLimit == 0 || mPreRoundList.size() == 0) && mRoundList.size() != 0 ){
 			return new RoundClass(mRoundList.get(mRoundList.size()-1).getID()+1, 0, 0);
@@ -144,6 +123,10 @@ public class GameClass  implements Serializable{
 	
 	public int getMAXPlayerCount(){
 		return DokoData.MAX_PLAYER;
+	}
+	
+	public GAME_CNT_VARIANT getGameCntVariant(){
+		return this.cntVariant;
 	}
 	
 	
@@ -247,12 +230,12 @@ public class GameClass  implements Serializable{
 			for(int i=0;i<getPlayerCount();i++){
 				if(mWinnerList[i] == 1){
 					//Win
-					if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || GAME_CNT_VARIANT == DokoData.CNT_VARIANT_WIN)
+					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
 						getPlayer(i).updatePoints((float)mRound.getPoints());
 					else getPlayer(i).updatePoints((float)0);
 				}
 				else if(mSuspendList[i] != 1){
-					if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || GAME_CNT_VARIANT == DokoData.CNT_VARIANT_LOSE)
+					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
 						getPlayer(i).updatePoints((float) ((float)mRound.getPoints()* 1.5 *-1));
 					else getPlayer(i).updatePoints((float)0);
 				}
@@ -267,12 +250,12 @@ public class GameClass  implements Serializable{
 			for(int i=0;i<getPlayerCount();i++){
 				if(mWinnerList[i] == 1){
 					//Win
-					if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || GAME_CNT_VARIANT == DokoData.CNT_VARIANT_WIN)
+					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
 						getPlayer(i).updatePoints((float)(mRound.getPoints()*mFactor));
 					else getPlayer(i).updatePoints((float)0);
 				}
 				else if(mSuspendList[i] != 1){
-					if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || GAME_CNT_VARIANT == DokoData.CNT_VARIANT_LOSE)
+					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
 						getPlayer(i).updatePoints((float)(mRound.getPoints()*-1));
 					else getPlayer(i).updatePoints((float)0);
 				}
@@ -297,14 +280,14 @@ public class GameClass  implements Serializable{
 		
 		for(int i=0; i<getPlayerCount();i++){
 			if(i!=mSoloPos &&  mSuspendList[i] != 1){
-				if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || (isSoloWinner &&  GAME_CNT_VARIANT == DokoData.CNT_VARIANT_LOSE)
-						|| (!isSoloWinner &&  GAME_CNT_VARIANT == DokoData.CNT_VARIANT_WIN))
+				if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || (isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
+						|| (!isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN))
 					getPlayer(i).updatePoints((float)mPoints);
 				else getPlayer(i).updatePoints((float)0);
 			}	
 		}
-		if(GAME_CNT_VARIANT == DokoData.CNT_VARIANT_NORMAL || (isSoloWinner &&  GAME_CNT_VARIANT == DokoData.CNT_VARIANT_WIN)
-				 || (!isSoloWinner &&  GAME_CNT_VARIANT == DokoData.CNT_VARIANT_LOSE))
+		if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || (isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
+				 || (!isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE))
 			getPlayer(mSoloPos).updatePoints((float)(getActivePlayerCount()-1)*mPoints*-1);
 		else getPlayer(mSoloPos).updatePoints((float)0);
 	}
