@@ -119,6 +119,13 @@
                 android:layout_height="wrap_content"
                 layout="@layout/fragment_game_round_2_player_row" />
 
+            <include
+                android:id="@+id/fragment_game_round_2_player_row3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/fragment_game_round_2_player_row" />
+            
+                        
         </LinearLayout>
         
         <LinearLayout

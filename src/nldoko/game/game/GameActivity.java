@@ -220,8 +220,8 @@ public class GameActivity extends FragmentActivity  {
 	    	mGame.getPlayer(3).setName("P4");
 	    	mGame.getPlayer(4).setName("P5");
 	    	mGame.getPlayer(5).setName("P6");
-	    	mGame.getPlayer(5).setName("P7");
-	    	mGame.getPlayer(5).setName("P8");
+	    	mGame.getPlayer(6).setName("P7");
+	    	mGame.getPlayer(7).setName("P8");
         }
         return mGame;
     }
@@ -406,6 +406,8 @@ public class GameActivity extends FragmentActivity  {
 			
 			if(mGame.getPlayerCount() == 5 && i == 2){
 				mLl.removeView(mTv);
+			} else if(mGame.getPlayerCount() == 7 && i == 3){
+					mLl.removeView(mTv);
 			} else{
 				mTv.setText(mGame.getPlayer(i*2+1).getName());
 				mTv.setOnClickListener(mAddRoundPlayernameClickListener);

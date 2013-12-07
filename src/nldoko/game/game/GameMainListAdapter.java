@@ -218,6 +218,7 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     			case 0: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row0); break;
     			case 1: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row1); break;
     			case 2: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row2); break;
+    			case 3: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row3); break;
     		}
 
     		if(mPlayerRow == null) return v;
@@ -246,6 +247,10 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     		mPlayerRightRoundState = (ImageView)mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_right_state);
     	
 			if(mGame.getPlayerCount() == 5 && i == 2){
+				mPlayerRightName.setText("");
+				mPlayerRightPoints.setText("");
+				mPlayerRightRoundState.setImageDrawable(null);
+			} else if(mGame.getPlayerCount() == 7 && i == 3){
 				mPlayerRightName.setText("");
 				mPlayerRightPoints.setText("");
 				mPlayerRightRoundState.setImageDrawable(null);

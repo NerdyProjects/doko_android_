@@ -196,6 +196,8 @@ public class EditRoundActivity extends Activity {
 			
 			if(mPlayerCnt == 5 && i == 2){
 				mLl.removeView(mTv);
+			} else if(mPlayerCnt == 7 && i == 3){
+				mLl.removeView(mTv);
 			}
 			else{
 				mTv.setText(mPlayerNames.get(i*2+1));
