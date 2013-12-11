@@ -35,7 +35,7 @@
                android:id="@+id/fragment_game_round_str_prim"
                android:layout_width="0dip"
                android:layout_height="match_parent"
-               android:layout_weight="0.8"
+               android:layout_weight="0.6"
                android:gravity="center|left"
                android:paddingLeft="5dp"
                android:text="@string/str_game_cnt_variant"
@@ -47,7 +47,7 @@
             android:id="@+id/sp_game_cnt_variant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.4" />
 
     </LinearLayout>
 
