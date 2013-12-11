@@ -66,7 +66,7 @@
                  android:id="@+id/categorie_settings_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/categorie_header_with_icon" />
+                layout="@layout/categorie_header_with_icon_and_icon_back" />
 
             <include
                 android:layout_width="fill_parent"

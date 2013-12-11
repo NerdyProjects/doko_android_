@@ -1,0 +1,9 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/info_settings_dialog_entry_header"
+    android:paddingTop="2dp"
+	android:paddingBottom="2dp"
+	android:textAppearance="?android:attr/textAppearanceLarge" />
+
+

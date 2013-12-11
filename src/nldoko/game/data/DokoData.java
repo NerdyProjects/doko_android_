@@ -53,6 +53,7 @@ public class DokoData {
 			R.id.fragment_game_round_view_table_player_8,
 	};	
 	
+	
 	public static final String str_round_type_win_solo = "Solo gewonnen";
 	public static final String str_round_type_lose_solo = "Solo verloren";
 	public static final String str_round_type_solo = "Solo";

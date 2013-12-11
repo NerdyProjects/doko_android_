@@ -7,9 +7,13 @@ import nldoko.game.XML.DokoXMLClass;
 import nldoko.game.data.DokoData;
 import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 import nldoko.game.information.AboutActivity;
+import nldoko.game.information.InfoSettingsDialog;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +23,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -103,6 +109,12 @@ public class NewGameActivity extends Activity {
     	mTv.setText(getResources().getString(R.string.str_game_settings));
     	mIv = (ImageView)mLayout.findViewById(R.id.icon);
     	mIv.setImageDrawable(getResources().getDrawable(R.drawable.action_settings));
+    	mIv = (ImageView)mLayout.findViewById(R.id.icon_back);
+    	mIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_about));
+    	
+        Animation inOutInfinit = AnimationUtils.loadAnimation(this, R.anim.about_icon_infinit_fade_in_out);
+        mIv.startAnimation(inOutInfinit);
+        if(mIv != null)mIv.setOnClickListener(new settingInfoClickListener());
     	
     	mBtnStart = (Button)findViewById(R.id.btn_change_game_settings);
     	mBtnStart.setOnClickListener(new startBtnClickListener());
@@ -270,6 +282,14 @@ public class NewGameActivity extends Activity {
 			
 		}
     	
+    }
+    
+    private class settingInfoClickListener implements OnClickListener{
+		@Override
+		public void onClick(View v) {
+			InfoSettingsDialog infoDialog = new InfoSettingsDialog(mContext);
+			infoDialog.show();
+		}
     }
 
 

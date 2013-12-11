@@ -29,7 +29,7 @@
     <string name="str_bock_limit">Limit Bock</string>
     <string name="str_bock">Bock</string>
     <string name="str_bockround">Bockrunde</string>
-    <string name="str_bockrounds">Bockrunde(n)</string>
+    <string name="str_bockrounds">Bockrunden</string>
     <string name="str_bock_preview_on_off">Bockvorschau an/aus</string>
     <string name="str_bock_preview_not_posible">Bockvorschau nicht vorhanden da das Bocklimit \"0\" ist</string>
     <string name="str_solo">Solo</string>
@@ -40,7 +40,7 @@
     <string name="anim_inout">300</string>
     
     <string name="str_game">Aktuelles Spiel</string>
-    <string name="str_game_cnt_variant">Zählvariante Punkte</string>
+    <string name="str_game_cnt_variant">Zählvariante</string>
     <string name="str_game_cnt_variant_normal">Standard</string>
     <string name="str_game_cnt_variant_lose">Verlierer</string>
     <string name="str_game_cnt_variant_win">Gewinner</string>
@@ -69,6 +69,40 @@
     <string name="str_no">Nein</string>
     <string name="str_accept">Ok</string>
     <string name="str_abort">Abbrechen</string>
+    <string name="str_close">Schließen</string>
+    
+    <!-- INFO/HELP -->
+    <string name="str_info">Info</string>
+    <string name="str_info_cnt_cnt_variants">Zählvarianten</string>
+    <string name="str_info_cnt_cnt_variant_standard">Die Verlierer bekommen Punkte abgezogen, die Gewinner bekommen Punkte hinzu.</string>   
+    <string name="str_info_cnt_cnt_variant_lose">Nur die Verlierer bekommen Punkte abgezogen. Die Punkte der Gewinner &amp; evtl. ausgesetzte Spieler bleiben unverändert. (Umgekehrte Variante Gewinner).</string> 
+    <string name="str_info_cnt_cnt_variant_win">Nur die Gewinner bekommen Punkte dazu. Die Punkte der Verlierer &amp; evtl. ausgesetzte Spieler bleiben unverändert. (Umgekehrte Variante Verlierer).</string>
+    <string name="str_info_active_players_info">Aktive Spieler: Ein Spiel kann mit 5 Spieler gestartet werden und nur 4 aktive Spieler gebene. D.h. jede Runde gibt es einen Spieler der ausetzt (Dieser kann jede Runde frei festgelegt werden).</string> 
+    <string name="str_info_bock_cnt_info">Bei einer Bockrunde werden die Punkte verdoppelt. Bockrundenlimit von 0&#8211;4 einstellbar (0=keine Verdopplung, I = Punkte x2, II = Punkte x4,III = Punkte x8 usw.).</string> 
+    
+    <string-array name="infoSettingsDialogEntry1">
+    	<item name="title">@string/str_game_cnt_variant_normal</item>
+    	<item name="text">@string/str_info_cnt_cnt_variant_standard</item>
+	</string-array>
+	
+	 <string-array name="infoSettingsDialogEntry2">
+    	<item name="title">@string/str_game_cnt_variant_lose</item>
+    	<item name="text">@string/str_info_cnt_cnt_variant_lose</item>
+	</string-array>
+	
+	<string-array name="infoSettingsDialogEntry3">
+    	<item name="title">@string/str_game_cnt_variant_win</item>
+    	<item name="text">@string/str_info_cnt_cnt_variant_win</item>
+	</string-array>
+	
+	<array name="infoSettingsDialogEntries">
+    	<item>@array/infoSettingsDialogEntry1</item>
+    	<item>@array/infoSettingsDialogEntry2</item>
+    	<item>@array/infoSettingsDialogEntry3</item>
+	</array>
+    
+
+
     <string name="str_rights">Alle Rechte vorbehalten</string>
     <string name="str_disclaimer">
 		    Disclaimer of Warranty: \nThis Software (Android-Application) are provided on an "as-is" basis, without warranty of any kind, 
