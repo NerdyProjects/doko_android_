@@ -1,58 +1,25 @@
 package nldoko.game.information;
 
-import java.util.zip.Inflater;
-
 import nldoko.game.R;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-public class InfoSettingsDialog extends Dialog implements android.view.View.OnClickListener {
-	
-	private Context mContext;
-	private LinearLayout mContent;
-	private LayoutInflater mInflater;
-	private String[][] mCntEntries;
-	
+public class InfoSettingsDialog extends CustomDialog {
 
-	public Activity mActivity;
-	public Dialog mDialog;
-	public Button mOkBtn;
-	public TextView mDialogTitle;
-	
+	private String[][] mCntEntries;
+	private LinearLayout mContent;
+
 	public InfoSettingsDialog(Context context) {
 		super(context);
-		this.mContext = context;
-		mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		Resources res = mContext.getResources();
-		
-		TypedArray ta = res.obtainTypedArray(R.array.infoSettingsDialogEntries);
-		int n = ta.length();
-		mCntEntries = new String[n][];
-		for (int i = 0; i < n; ++i) {
-		    int id = ta.getResourceId(i, 0);
-		    if (id > 0) {
-		    	mCntEntries[i] = res.getStringArray(id);
-		    } 
-		}
-		ta.recycle();
 	}
   
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	    requestWindowFeature(Window.FEATURE_NO_TITLE);
+	public void setUpContent() {
 	    setContentView(R.layout.info_settings_dialog);
 	    
 	    mContent = (LinearLayout)findViewById(R.id.info_settings_dialog_container);
@@ -100,6 +67,7 @@ public class InfoSettingsDialog extends Dialog implements android.view.View.OnCl
 	    mOkBtn = (Button)findViewById(R.id.info_settings_dialog_btn);
 	    mOkBtn.setText(mContext.getResources().getString(R.string.str_close));
 	    mOkBtn.setOnClickListener(this);
+		
 	}
 
 	@Override
