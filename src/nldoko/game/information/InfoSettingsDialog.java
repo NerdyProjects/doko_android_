@@ -2,6 +2,8 @@ package nldoko.game.information;
 
 import nldoko.game.R;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,6 +17,20 @@ public class InfoSettingsDialog extends CustomDialog {
 
 	public InfoSettingsDialog(Context context) {
 		super(context);
+		
+		Resources res = mContext.getResources();
+		
+		TypedArray ta = res.obtainTypedArray(R.array.infoSettingsDialogEntries);
+		int n = ta.length();
+		mCntEntries = new String[n][];
+		for (int i = 0; i < n; ++i) {
+		    int id = ta.getResourceId(i, 0);
+		    if (id > 0) {
+		    	mCntEntries[i] = res.getStringArray(id);
+		    } 
+		}
+		ta.recycle();
+
 	}
   
 	
