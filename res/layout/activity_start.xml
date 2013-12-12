@@ -75,4 +75,30 @@
         </LinearLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/saved_game_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/saved_game_btn_text"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.70"
+            android:layout_width="0dp"
+            android:gravity="right|center_vertical"
+            android:text="@string/str_saved_game"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/image_saved_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/str_saved_game"
+            android:src="@drawable/ic_action_save" />
+    </LinearLayout>
+
 </LinearLayout>

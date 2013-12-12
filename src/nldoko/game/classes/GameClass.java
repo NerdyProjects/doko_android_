@@ -1,7 +1,10 @@
 package nldoko.game.classes;
 
+import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import nldoko.game.data.DokoData;
 import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
@@ -18,15 +21,15 @@ public class GameClass  implements Serializable{
 	private int mPlayerCount;
 	private int mActivePlayerCount;
 	private int mBockRoundLimit;
+	private String mCurrentFilename;
 	
 	public GameClass(){
-		this.mPlayers = new ArrayList<PlayerClass>();
-		this.mRoundList = new ArrayList<RoundClass>();
-		this.mPreRoundList = new ArrayList<RoundClass>();
-    	this.mPlayerCount = 0;
-    	this.mActivePlayerCount = 0;    
-    	this.mBockRoundLimit = 0;
-    	this.cntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
+		setDefaults();
+	}
+	
+	public GameClass(String fromFile){
+		setDefaults();
+		this.mCurrentFilename = fromFile;
 	}
 	
 	public GameClass(int playerCount, int activePlayer, int bockLimit, GAME_CNT_VARIANT cntVariant){
@@ -43,6 +46,16 @@ public class GameClass  implements Serializable{
     		this.mPlayers.add(new PlayerClass(i));
     	} 	
 
+	}
+	
+	private void setDefaults(){
+		this.mPlayers = new ArrayList<PlayerClass>();
+		this.mRoundList = new ArrayList<RoundClass>();
+		this.mPreRoundList = new ArrayList<RoundClass>();
+    	this.mPlayerCount = 0;
+    	this.mActivePlayerCount = 0;    
+    	this.mBockRoundLimit = 0;
+    	this.cntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
 	}
 	
 	public void setGameDataFromRestore(ArrayList<PlayerClass> playerList, ArrayList<RoundClass> preRoundList){
@@ -173,6 +186,16 @@ public class GameClass  implements Serializable{
 			}
 		}		
 	}
+	
+	public void editLastRound(int newRoundPoints, boolean isNewBockRoundSet, int[] mWinnerList, int[] mSuspendList) {
+		RoundClass mRound = mRoundList.get(mRoundList.size()-1);
+		
+		if (mRound != null) {
+			mRound.setPoints(newRoundPoints);
+			mRound.setRoundType(getWinnerCnt(mWinnerList),mActivePlayerCount);
+			updatePlayerPoints(mRound,mWinnerList,mSuspendList);
+		}
+	}
 
 	public void addNewRound(int newRoundPoints, boolean isNewBockRoundSet, int[] mWinnerList, int[] mSuspendList) {
 		RoundClass mRound = getNewRound();
@@ -204,7 +227,7 @@ public class GameClass  implements Serializable{
 		
 		for(int i=0;i<getPlayerCount();i++){
 			if(mSuspendList[i] == 1)
-				getPlayer(i).updatePoints((float) 0);
+				getPlayer(i).updatePoints(mRound.getID(),(float) 0);
 			else if(mWinnerList[i] == 1){
 				mWinnerCnt++;
 				mSoloWinPos = i;
@@ -231,13 +254,13 @@ public class GameClass  implements Serializable{
 				if(mWinnerList[i] == 1){
 					//Win
 					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
-						getPlayer(i).updatePoints((float)mRound.getPoints());
-					else getPlayer(i).updatePoints((float)0);
+						getPlayer(i).updatePoints(mRound.getID(),(float)mRound.getPoints());
+					else getPlayer(i).updatePoints(mRound.getID(),(float)0);
 				}
 				else if(mSuspendList[i] != 1){
 					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
-						getPlayer(i).updatePoints((float) ((float)mRound.getPoints()* 1.5 *-1));
-					else getPlayer(i).updatePoints((float)0);
+						getPlayer(i).updatePoints(mRound.getID(),(float) ((float)mRound.getPoints()* 1.5 *-1));
+					else getPlayer(i).updatePoints(mRound.getID(),(float)0);
 				}
 			}
 		}
@@ -251,13 +274,13 @@ public class GameClass  implements Serializable{
 				if(mWinnerList[i] == 1){
 					//Win
 					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
-						getPlayer(i).updatePoints((float)(mRound.getPoints()*mFactor));
-					else getPlayer(i).updatePoints((float)0);
+						getPlayer(i).updatePoints(mRound.getID(),(float)(mRound.getPoints()*mFactor));
+					else getPlayer(i).updatePoints(mRound.getID(),(float)0);
 				}
 				else if(mSuspendList[i] != 1){
 					if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
-						getPlayer(i).updatePoints((float)(mRound.getPoints()*-1));
-					else getPlayer(i).updatePoints((float)0);
+						getPlayer(i).updatePoints(mRound.getID(),(float)(mRound.getPoints()*-1));
+					else getPlayer(i).updatePoints(mRound.getID(),(float)0);
 				}
 			}
 		}
@@ -265,7 +288,7 @@ public class GameClass  implements Serializable{
 		
 		//Inactive player 
 		for(int i=getPlayerCount();i<getMAXPlayerCount();i++){
-			getPlayer(i).updatePoints((float)0);
+			getPlayer(i).updatePoints(mRound.getID(),(float)0);
 		}
 	}
 
@@ -282,14 +305,14 @@ public class GameClass  implements Serializable{
 			if(i!=mSoloPos &&  mSuspendList[i] != 1){
 				if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || (isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE)
 						|| (!isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN))
-					getPlayer(i).updatePoints((float)mPoints);
-				else getPlayer(i).updatePoints((float)0);
+					getPlayer(i).updatePoints(mRound.getID(),(float)mPoints);
+				else getPlayer(i).updatePoints(mRound.getID(),(float)0);
 			}	
 		}
 		if(cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_NORMAL || (isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_WIN)
 				 || (!isSoloWinner &&  cntVariant == GAME_CNT_VARIANT.CNT_VARIANT_LOSE))
-			getPlayer(mSoloPos).updatePoints((float)(getActivePlayerCount()-1)*mPoints*-1);
-		else getPlayer(mSoloPos).updatePoints((float)0);
+			getPlayer(mSoloPos).updatePoints(mRound.getID(),(float)(getActivePlayerCount()-1)*mPoints*-1);
+		else getPlayer(mSoloPos).updatePoints(mRound.getID(),(float)0);
 	}
 
 
@@ -302,4 +325,16 @@ public class GameClass  implements Serializable{
 		return mStr;
 	}
 	
+	public String currentFilename() {
+		return mCurrentFilename;
+	}
+		
+	public String generateNewFilename(){
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy_HH:mm:ss");
+        String formattedDate = df.format(c.getTime());
+        mCurrentFilename = formattedDate+DokoData.SAVED_GAME_FILE_POSTFIX;
+        return currentFilename();
+	}
+		
 }

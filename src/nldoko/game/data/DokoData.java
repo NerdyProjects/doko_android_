@@ -3,6 +3,7 @@ package nldoko.game.data;
 import java.util.ArrayList;
 
 import nldoko.game.R;
+import nldoko.game.data.DokoData.PLAYER_ROUND_RESULT_STATE;
 
 public class DokoData {
 	
@@ -12,6 +13,7 @@ public class DokoData {
 	
 	public static ArrayList<String> PLAYER_NAMES = new ArrayList<String>();
 	public static final String PLAYER_NAMES_XML = "player_names.xml";
+	public static final String SAVED_GAME_FILE_POSTFIX =  "_dokoSavedGame.xml";
 	
 	
 	public static enum GAME_RESULT_TYPE {
@@ -25,7 +27,18 @@ public class DokoData {
 	public static enum PLAYER_ROUND_RESULT_STATE {
 		LOSE_STATE, 
 		WIN_STATE, 
-		SUSPEND_STATE
+		SUSPEND_STATE;
+
+		public static PLAYER_ROUND_RESULT_STATE valueOf(int state) {
+			switch (state) {
+				case 0:	return LOSE_STATE;
+				case 1:	return WIN_STATE;
+				case 2:	return SUSPEND_STATE;
+				default:
+					break;
+			}
+			return null;
+		}
 	}
 	
 	
@@ -64,6 +77,7 @@ public class DokoData {
 	
 	
 	public static final String CHANGE_GAME_SETTINGS_KEY = "CHANGE_GAME_SETTINGS";
+	public static final String CHANGE_ROUND_KEY			= "CHANGE_ROUND";
 	public static final String PLAYER_CNT_KEY 			= "PLAYER_CNT";
 	public static final String BOCKLIMIT_KEY 			= "BOCKLIMIT";
 	public static final String BOCKROUND_KEY 			= "BOCKROUND";
@@ -73,6 +87,9 @@ public class DokoData {
 	
 	public static final String[] PLAYERS_KEY  = {"PLAYER_1","PLAYER_2","PLAYER_3","PLAYER_4",
 												 "PLAYER_5","PLAYER_6","PLAYER_7","PLAYER_8"};
+	
+	public static final int CHANGE_GAME_SETTINGS_ACTIVITY_CODE = 1122;
+	public static final int EDIT_ROUND_ACTIVITY_CODE = 1133;
 	
 
 

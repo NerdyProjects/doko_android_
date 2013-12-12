@@ -17,6 +17,7 @@ import nldoko.game.classes.RoundClass;
 import nldoko.game.data.DokoData;
 import nldoko.game.data.DokoData.GAME_CNT_VARIANT;
 import nldoko.game.data.DokoData.GAME_VIEW_TYPE;
+import nldoko.game.data.DokoData.PLAYER_ROUND_RESULT_STATE;
 import nldoko.game.information.AboutActivity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -61,7 +62,7 @@ public class GameActivity extends FragmentActivity  {
 	private Context mContext;
 	
 	private String TAG = "Game";
-	
+		
 	private static ListView mLvRounds;
 	private static GameMainListAdapter mLvRoundAdapter;
 	
@@ -125,7 +126,7 @@ public class GameActivity extends FragmentActivity  {
         	Toast.makeText(this, getResources().getString(R.string.str_error_game_start), Toast.LENGTH_LONG).show();
         	finish();
         }
-           
+                  
         loadSwipeViews();
  
         mAddRoundPlayernameClickListener = new GameAddRoundPlayernameClickListener();
@@ -187,8 +188,13 @@ public class GameActivity extends FragmentActivity  {
         	mGame =  loadStateData(savedInstanceState);
         }
         else if(extras != null && extras.getBoolean("RestoreGameFromXML", false)){
-        	Log.d(TAG,"Game from XML");
-        	mGame =  DokoXMLClass.restoreGameStateFromXML(this);
+        	String file = extras.getString("filename");
+        	Log.d(TAG,"Game from XML file:"+file);
+        	mGame =  DokoXMLClass.restoreGameStateFromXML(this,file);
+        	if (mGame != null) {
+        		// if success delete old file
+                DokoXMLClass.saveGameStateToXML(mContext, mGame);
+        	}
         }
         else if(extras != null){
         	mPlayerCnt 		= extras.getInt(DokoData.PLAYER_CNT_KEY,0);
@@ -526,7 +532,7 @@ public class GameActivity extends FragmentActivity  {
 			
 			resetNewRoundFields();
 			
-			DokoXMLClass.saveGameStateToXML(v.getContext(), mGame);
+			DokoXMLClass.saveGameStateToXML(mContext, mGame);
 			
 			setBottomInfo();
 		}
@@ -810,7 +816,7 @@ public class GameActivity extends FragmentActivity  {
     			i.putExtra(DokoData.PLAYER_CNT_KEY, mGame.getPlayerCount());
     			i.putExtra(DokoData.BOCKLIMIT_KEY, mGame.getBockRoundLimit());
     			i.putExtra(DokoData.ACTIVE_PLAYER_KEY, mGame.getActivePlayerCount());
-    			startActivityForResult(i,1);
+    			startActivityForResult(i,DokoData.CHANGE_GAME_SETTINGS_ACTIVITY_CODE);
     		break;
     		
     		case R.id.menu_bock_preview_on_off:
@@ -843,7 +849,59 @@ public class GameActivity extends FragmentActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
-    	
+
+    	switch (requestCode) {
+			case DokoData.CHANGE_GAME_SETTINGS_ACTIVITY_CODE:
+				handleChangeGameSettingsFinish(requestCode, resultCode, data);
+				break;
+
+			case DokoData.EDIT_ROUND_ACTIVITY_CODE:
+				handleEditRoundFinish(requestCode, resultCode, data);
+			default:
+				break;
+		}
+    }
+    
+    private void handleEditRoundFinish(int requestCode, int resultCode, Intent data) {
+    	Bundle extras = null;
+    	int mNewRoundPoints;
+        int mTmpWinnerList[] = new int[DokoData.MAX_PLAYER];
+        int mTmpSuspendList[] = new int[DokoData.MAX_PLAYER];
+		PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
+		Log.d("GA before",mGame.toString());
+    	if(data != null) extras = data.getExtras();
+    	if(extras != null && extras.getBoolean(DokoData.CHANGE_ROUND_KEY,false)){
+    		mNewRoundPoints = extras.getInt(DokoData.ROUND_POINTS_KEY,0);
+    		
+    		int mTmpState;
+        	for(int k=0; k<mPlayerCnt; k++){
+        		mTmpState = extras.getInt(DokoData.PLAYERS_KEY[k]+"_STATE",-1);
+        		if (mTmpState == -1 || PLAYER_ROUND_RESULT_STATE.valueOf(mTmpState) == null) {
+        			Toast.makeText(mContext, getResources().getString(R.string.str_edit_round_error), Toast.LENGTH_LONG).show();
+        			return;
+        		} else {
+        			mTmpWinnerList[k] = 0; // lose default
+        			mTmpSuspendList[k] = 0; // not suspending  default
+        			mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.valueOf(mTmpState);
+        			switch (mPlayerRoundState) {
+						case WIN_STATE: mTmpWinnerList[k] = 1;	break;
+						case SUSPEND_STATE: mTmpSuspendList[k] = 1;	break;
+						default:
+							break;
+					}
+        		}
+        	}
+
+        	mGame.editLastRound(mNewRoundPoints, false, mTmpWinnerList, mTmpSuspendList);
+        	reloadSwipeViews(); 
+        	//Log.d("GA after",mGame.toString());
+        	DokoXMLClass.saveGameStateToXML(mContext, mGame);
+        	
+        	Toast.makeText(mContext, getResources().getString(R.string.str_edit_round_finish), Toast.LENGTH_LONG).show();
+        }
+    }
+    
+    private void handleChangeGameSettingsFinish(int requestCode, int resultCode, Intent data) {
     	Bundle extras = null;
     	int mActivePlayers,mBockLimit,mPlayerCnt,mOldPlayerCnt;
     	String mName = "";
@@ -872,12 +930,11 @@ public class GameActivity extends FragmentActivity  {
         	}
 
         	reloadSwipeViews(); 
+        	DokoXMLClass.saveGameStateToXML(mContext, mGame);
         	
         	Toast.makeText(mContext, getResources().getString(R.string.str_change_game_settings_finish), Toast.LENGTH_LONG).show();
         }
     }
-    
-    
     
     @Override
     public void onBackPressed(){

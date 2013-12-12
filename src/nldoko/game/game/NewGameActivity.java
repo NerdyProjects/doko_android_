@@ -284,7 +284,7 @@ public class NewGameActivity extends Activity {
     	
     }
     
-    private class settingInfoClickListener implements OnClickListener{
+    public class settingInfoClickListener implements OnClickListener{
 		@Override
 		public void onClick(View v) {
 			InfoSettingsDialog infoDialog = new InfoSettingsDialog(mContext);

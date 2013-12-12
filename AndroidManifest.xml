@@ -27,6 +27,7 @@
         <activity android:name="nldoko.game.game.GameActivity"  android:label="@string/app_name" />
         <activity android:name="nldoko.game.game.ChangeGameSettingActivity"  android:label="@string/app_name" />
         <activity android:name="nldoko.game.game.EditRoundActivity"  android:label="@string/app_name" />
+        <activity android:name="nldoko.game.game.SavedGameListActivity"  android:label="@string/app_name" />
     </application>
 
 </manifest>

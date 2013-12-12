@@ -10,6 +10,7 @@ import nldoko.game.data.DokoData;
 import nldoko.game.data.DokoData.GAME_RESULT_TYPE;
 import nldoko.game.data.DokoData.GAME_VIEW_TYPE;
 import nldoko.game.data.DokoData.PLAYER_ROUND_RESULT_STATE;
+import nldoko.game.game.NewGameActivity.settingInfoClickListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +24,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -276,49 +279,54 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
         return v;
 	}
 	
-	private void showEditRoundDialog(final int roundNumber){
+	private void showEditRoundDialog(final int roundNumber, final View v){
 		String mStr = "";
 		Builder back = new AlertDialog.Builder(mContext);
-		if(mGame.getRoundList().get(roundNumber-1).getPoints() == 0){
+
+		if(mGame.getRoundList().get(roundNumber-1).getPoints() == 0 || mGame.getRoundList().size() > roundNumber){
 			Toast.makeText(mContext, R.string.str_edit_round_not_possible, Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+        Animation inOutInfinit = AnimationUtils.loadAnimation(mContext, R.anim.infinit_fade_in_out);
+        v.startAnimation(inOutInfinit);
+        
 		mStr = mContext.getResources().getString(R.string.str_game_round)+" "+roundNumber+" "+mContext.getResources().getString(R.string.str_edit)+"?";
 		
 		back.setTitle(R.string.str_edit_round);
 		back.setMessage(mStr);
 		back.setPositiveButton(R.string.str_yes, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
+				Log.d("ef",mGame.toString());
 				Log.d("roundnr edit yes","round nr:"+roundNumber);
 				Intent i = new Intent(mContext, EditRoundActivity.class);
 				PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
 				for(int k=0;k<mGame.getPlayerCount();k++){
 					mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
 					i.putExtra(DokoData.PLAYERS_KEY[k], mGame.getPlayer(k).getName());
-					if(roundNumber == 1){
-						if(mGame.getPlayer(k).getPointHistory(roundNumber-1) < 0)
-							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
-						else if(mGame.getPlayer(k).getPointHistory(roundNumber-1) == 0)
-							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
+					Log.d("roundnr edit yes","p:"+mGame.getPlayer(k).getPointHistoryPerRound(roundNumber - 1)+" lenght:"+mGame.getPlayer(k).getPointHistoryPerRoundLength());
+					if(mGame.getPlayer(k).getPointHistoryPerRound(roundNumber - 1) < 0) {
+						mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
+						Log.d("roundnr edit yes","lose"+mGame.getPlayer(k).getPointHistoryPerRound(roundNumber - 1));
+					} else if(mGame.getPlayer(k).getPointHistoryPerRound(roundNumber - 1) == 0) {
+						mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
 					}
-					else{
-						if((mGame.getPlayer(k).getPointHistory(roundNumber-1) - mGame.getPlayer(k).getPointHistory(roundNumber-2)) < 0)
-							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
-						else if((mGame.getPlayer(k).getPointHistory(roundNumber-1) - mGame.getPlayer(k).getPointHistory(roundNumber-2)) == 0)
-							mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
-					}
+					
 					i.putExtra(DokoData.PLAYERS_KEY[k]+"_STATE", mPlayerRoundState);
 				}
 				i.putExtra(DokoData.BOCKROUND_KEY, mGame.getRoundList().get(roundNumber-1).getBockCount());
 				i.putExtra(DokoData.PLAYER_CNT_KEY, mGame.getPlayerCount());
 				i.putExtra(DokoData.ACTIVE_PLAYER_KEY, mGame.getActivePlayerCount());
 				i.putExtra(DokoData.ROUND_POINTS_KEY, mGame.getRoundList().get(roundNumber-1).getPointsWithoutBock());
-				((Activity) mContext).startActivityForResult(i,2);
+				((Activity) mContext).startActivityForResult(i,DokoData.EDIT_ROUND_ACTIVITY_CODE);
+				v.clearAnimation();
 			}
 		});
 
 		back.setNegativeButton(R.string.str_no, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {}
+			public void onClick(DialogInterface dialog, int whichButton) {
+				v.clearAnimation();
+			}
 		});
 		back.show();
 	}
@@ -329,20 +337,21 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 		public boolean onLongClick(View v) {
 			int mRoundNr = 0;
 			String mTmp = "";
-			TextView mTvRoundPoints = null;
+			TextView mTvRoundNr = null;
 	    	switch(mRoundListViewMode){
-	    		case ROUND_VIEW_DETAIL: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_number); break;
-	    		case ROUND_VIEW_TABLE: mTvRoundPoints = (TextView)v.findViewById(R.id.fragment_game_round_view_table_round_nr); break;
+	    		case ROUND_VIEW_DETAIL: mTvRoundNr = (TextView)v.findViewById(R.id.fragment_game_round_number); break;
+	    		case ROUND_VIEW_TABLE: mTvRoundNr = (TextView)v.findViewById(R.id.fragment_game_round_view_table_round_nr); break;
 	    		default: return true;
 	    	}
 			
-	    	if(mTvRoundPoints == null) return false; //Exit if view failure
+	    	if(mTvRoundNr == null) return false; //Exit if view failure
 	    	
-	    	mTmp = mTvRoundPoints.getText().toString();
+	    	mTmp = mTvRoundNr.getText().toString();
 	    	mTmp = mTmp.replace("#", ""); //detail view round number has # @ pos0
 	    	mRoundNr = Integer.valueOf(mTmp);
-	    		    	
-	    	showEditRoundDialog(mRoundNr);
+	    		    
+	        
+	    	showEditRoundDialog(mRoundNr,v);
 			return false;
 		}
 		

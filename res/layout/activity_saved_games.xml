@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+	android:focusableInTouchMode="true"
+	android:id="@+id/saved_game_layout"
+    tools:context=".NewGameActivity" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <LinearLayout
+            android:id="@+id/saved_games_entries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white" />
+
+    </ScrollView>
+
+</LinearLayout>

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -27,11 +28,14 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditRoundActivity extends Activity {
 	private Context mContext;
 	
-	private String TAG = "EditRound";
+	private static Intent intent;
+	
+	private static String TAG = "EditRound";
 	
 	private ActionBar mActionBar;
 	private static LinearLayout mLayout;
@@ -39,24 +43,25 @@ public class EditRoundActivity extends Activity {
 	private static TextView mTvAddRoundBockPoints;
 	private static RadioGroup mNewRoundBockRadioGroup; 
 	private static Button mBtnEditRound;
+	private static Button mBtnAbort;
 	private static EditText mEtNewRoundPoints;
 	
 
 	
-	private static ArrayList<TextView> mGameAddRoundPlayer = new ArrayList<TextView>();
+	private static ArrayList<TextView> mRoundPlayer = new ArrayList<TextView>();
 	
     private static RadioButton mRNewRoundBockYes;
     private static RadioButton mRNewRoundBockNo;
     
-    private static GameAddRoundPlayernameClickListener mAddRoundPlayernameClickListener;
-    private static GameAddRoundPlayernameLongClickListener mAddRoundPlayernameLongClickListener;
+    private static PlayernameClickListener mPlayernameClickListener;
+    private static PlayernameLongClickListener mPlayernameLongClickListener;
     private static btnEditRoundClickListener mBtnEditRoundClickListener;
 
-	private static ArrayList<String> mPlayerNames = new ArrayList<String>();
-	private static ArrayList<PLAYER_ROUND_RESULT_STATE> mPlayerStates = new ArrayList<PLAYER_ROUND_RESULT_STATE>();
+	private static ArrayList<String> mPlayerNames;
+	private static ArrayList<PLAYER_ROUND_RESULT_STATE> mPlayerStates;
 	
-    private static int mWinnerList[] = new int[DokoData.MAX_PLAYER];
-    private static int mSuspendList[] = new int[DokoData.MAX_PLAYER];
+    private static int mWinnerList[];
+    private static int mSuspendList[];
 	
 	
 	private static int mActivePlayers;
@@ -77,10 +82,15 @@ public class EditRoundActivity extends Activity {
         mActionBar.setTitle(getResources().getString(R.string.str_edit_round));
         mActionBar.setDisplayHomeAsUpEnabled(true);
         
-    	Intent intent = getIntent();
+    	intent = getIntent();
     	Bundle extras = intent.getExtras();
     	
     	String mName = "";
+    	
+    	mPlayerNames =  	new ArrayList<String>();
+    	mPlayerStates = 	new ArrayList<PLAYER_ROUND_RESULT_STATE>();
+    	mWinnerList = 		new int[DokoData.MAX_PLAYER];
+    	mSuspendList = 		new int[DokoData.MAX_PLAYER];
 
 
     	if(extras != null){
@@ -106,8 +116,8 @@ public class EditRoundActivity extends Activity {
     	
     	mLayout = (LinearLayout)findViewById(R.id.game_edit_round_main_layout);
         if(mLayout != null){
-            mAddRoundPlayernameLongClickListener = new GameAddRoundPlayernameLongClickListener();
-            mAddRoundPlayernameClickListener = new GameAddRoundPlayernameClickListener();
+            mPlayernameLongClickListener = new PlayernameLongClickListener();
+            mPlayernameClickListener = new PlayernameClickListener();
             mBtnEditRoundClickListener = new btnEditRoundClickListener();
         	setUIEditNewRound(mLayout);
         }
@@ -130,6 +140,9 @@ public class EditRoundActivity extends Activity {
 		
 		mBtnEditRound = (Button)rootView.findViewById(R.id.btn_game_edit_round);
 		mBtnEditRound.setOnClickListener(mBtnEditRoundClickListener);
+		
+		mBtnAbort = (Button)rootView.findViewById(R.id.btn_game_edit_round_abort);
+		mBtnAbort.setOnClickListener(mBtnEditRoundClickListener);
 		
 		mTvAddRoundBockPoints = (TextView)rootView.findViewById(R.id.game_add_round_bock_points);
 		if(mBockRound > 0){
@@ -172,7 +185,7 @@ public class EditRoundActivity extends Activity {
     	TextView mTv;
     	int mTmp;
     	
-    	mGameAddRoundPlayer.clear();
+    	mRoundPlayer.clear();
     	
 		mLayout = (LinearLayout)rootView.findViewById(R.id.game_add_round_playersection);
 		
@@ -184,9 +197,9 @@ public class EditRoundActivity extends Activity {
 			mTv = (TextView)mLl.findViewById(R.id.game_add_round_playername_left);
 			
 			mTv.setText(mPlayerNames.get(i*2));
-			mTv.setOnClickListener(mAddRoundPlayernameClickListener);
-			if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mAddRoundPlayernameLongClickListener);
-			mGameAddRoundPlayer.add(mTv);
+			mTv.setOnClickListener(mPlayernameClickListener);
+			if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mPlayernameLongClickListener);
+			mRoundPlayer.add(mTv);
 			if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.WIN_STATE)
 				mTv.performClick();	
 			else if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE)
@@ -201,13 +214,16 @@ public class EditRoundActivity extends Activity {
 			}
 			else{
 				mTv.setText(mPlayerNames.get(i*2+1));
-				mTv.setOnClickListener(mAddRoundPlayernameClickListener);
-				if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mAddRoundPlayernameLongClickListener);
-				mGameAddRoundPlayer.add(mTv);
-				if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.WIN_STATE)
+				mTv.setOnClickListener(mPlayernameClickListener);
+				if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mPlayernameLongClickListener);
+				mRoundPlayer.add(mTv);
+				if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.WIN_STATE) {
+					Log.d(TAG,"win state click");
 					mTv.performClick();	
-				else if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE)
-					mTv.performLongClick();
+				} else if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE) {
+					Log.d(TAG,"lose state long click");
+					mTv.performLongClick();	
+				}
 			}
 		}
 	}
@@ -229,6 +245,23 @@ public class EditRoundActivity extends Activity {
 		});
 		back.show();
 	}
+	private boolean isNewRoundDataOK() {
+		if(getNewRoundPoints() == -1) return false;
+		if(!isWinnerCntOK() || !isSuspendCntOK() ) return false;
+		return true;
+	}
+	
+	private boolean isSuspendCntOK(){
+		if(mPlayerCnt-mActivePlayers == 0) return true;
+		if(getSuspendCnt() == (mPlayerCnt-mActivePlayers)) return true;
+		return false;
+	}
+	
+	private boolean isWinnerCntOK(){
+		int mWinnerCnt = getWinnerCnt();
+		if(mWinnerCnt >= mActivePlayers || mWinnerCnt == 0) return false;
+		return true;
+	}
 		
 	private int getSuspendCnt(){
 		int m = 0;
@@ -246,14 +279,14 @@ public class EditRoundActivity extends Activity {
 		return m;
 	}
 	
-	public class GameAddRoundPlayernameClickListener implements OnClickListener{
+	public class PlayernameClickListener implements OnClickListener{
 		@SuppressWarnings("deprecation")
 		@Override
 		public void onClick(View v) {
-			if(mGameAddRoundPlayer.size() > mSuspendList.length)
-				Log.e(TAG,"error Array"+mGameAddRoundPlayer.size()+"#"+mSuspendList.length);
-			for(int i=0;i<mGameAddRoundPlayer.size();i++){
-				if(v == mGameAddRoundPlayer.get(i) && mSuspendList[i]==0){
+			if(mRoundPlayer.size() > mSuspendList.length)
+				Log.e(TAG,"error Array"+mRoundPlayer.size()+"#"+mSuspendList.length);
+			for(int i=0;i<mRoundPlayer.size();i++){
+				if(v == mRoundPlayer.get(i) && mSuspendList[i]==0){
 					if(mWinnerList[i] == 0 && getWinnerCnt() < mActivePlayers-1){
 						((TextView) v).setBackgroundDrawable(v.getResources().getDrawable(R.drawable.select_green));
 						mWinnerList[i] = 1;
@@ -268,12 +301,12 @@ public class EditRoundActivity extends Activity {
 		}
     }
 	
-	public class GameAddRoundPlayernameLongClickListener implements OnLongClickListener{
+	public class PlayernameLongClickListener implements OnLongClickListener{
 		@SuppressWarnings("deprecation")
 		@Override
 		public boolean onLongClick(View v) {
-			for(int i=0;i<mGameAddRoundPlayer.size();i++){
-				if(v == mGameAddRoundPlayer.get(i) && mWinnerList[i]==0){
+			for(int i=0;i<mRoundPlayer.size();i++){
+				if(v == mRoundPlayer.get(i) && mWinnerList[i]==0){
 					if(mSuspendList[i] == 0 && getSuspendCnt() < mPlayerCnt-mActivePlayers){
 						v.setBackgroundDrawable(v.getResources().getDrawable(R.drawable.select_gray));
 						mSuspendList[i] = 1;
@@ -291,6 +324,37 @@ public class EditRoundActivity extends Activity {
 	public class btnEditRoundClickListener implements OnClickListener{
 		@Override
 		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.btn_game_edit_round:
+				if(!isNewRoundDataOK()){
+					Toast.makeText(v.getContext(), R.string.str_error_game_new_round_data, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+		    	Intent i = intent;
+		    	i.putExtra(DokoData.CHANGE_ROUND_KEY, true);
+		    	i.putExtra(DokoData.ROUND_POINTS_KEY, getNewRoundPoints() * (mBockRound + 1));
+		    	
+				PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
+				for(int k=0; k < mPlayerCnt; k++){
+					if (mSuspendList[k] == 1) {
+						mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE;
+					} else if (mWinnerList[k] == 1) {
+						mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
+					} else  {
+						mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.LOSE_STATE;
+					}
+					i.putExtra(DokoData.PLAYERS_KEY[k]+"_STATE", mPlayerRoundState.ordinal());
+				}
+	
+				setResult(RESULT_OK, i);
+		    	finish();	
+				break;
+				
+			default:
+				finish();
+				break;
+			}
 		}
 	}
 
@@ -311,5 +375,38 @@ public class EditRoundActivity extends Activity {
     	}
     	return true;
     }
+	
+	private ArrayList<String> getPlayerNames(){
+		ArrayList<String> mPlayerNames = new ArrayList<String>();
+		View v;
+		AutoCompleteTextView ac;
+		mLayout = (LinearLayout)findViewById(R.id.player_view_holder);
+
+    	for(int i=0;i<mLayout.getChildCount();i++){
+    	    v = mLayout.getChildAt(i);
+    	    if (v.getId() == R.id.player_entry){
+    	    	ac = (AutoCompleteTextView)v.findViewById(R.id.player_entry_auto_complete);
+    	    	if(!mPlayerNames.contains(ac.getText().toString().trim())){
+    	    		//Log.d(TAG,ac.getText().toString());
+    	    		mPlayerNames.add(ac.getText().toString().trim());
+    	    	}
+    	    }
+    	}
+
+    	return mPlayerNames;
+	}
+	
+	private int getNewRoundPoints(){
+		int mPoints;
+		try{
+			mPoints = Integer.valueOf(mEtNewRoundPoints.getText().toString());
+			return mPoints;
+		}
+		catch(Exception e){
+			return -1;
+		}
+	}
+	
+	
     
 }

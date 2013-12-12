@@ -1,0 +1,54 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:paddingLeft="5dp"
+    android:background="@color/white"
+    android:id="@+id/saved_game_entry" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_save" />
+            
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/saved_game_entry_filename"
+                android:layout_width="fill_parent"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/saved_game_entry_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_blue_dark" />
+    
+    
+</LinearLayout>

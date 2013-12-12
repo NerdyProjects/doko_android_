@@ -40,10 +40,11 @@ public class DokoXMLClass {
 	
 	private static final String TAG = "DokoXMLClass";
 	
-	private static String XML_GAME_STATE = "DokoGameStateSave.xml";
 	
 	public static boolean saveGameStateToXML(Context c, GameClass game){
 		if(game != null && DokoXMLClass.isAppDirOK(c)){
+			String oldFilename = game.currentFilename();
+			String newFilename = game.generateNewFilename();
 			XmlSerializer serializer = Xml.newSerializer();
 		    StringWriter writer = new StringWriter();
 
@@ -123,7 +124,7 @@ public class DokoXMLClass {
     	        //Write to file
     	        try{
     	        	//Log.d(TAG,writer.toString());
-					FileOutputStream fos = c.openFileOutput(XML_GAME_STATE,Context.MODE_PRIVATE);
+					FileOutputStream fos = c.openFileOutput(newFilename,Context.MODE_PRIVATE);
 					OutputStreamWriter osw = new OutputStreamWriter(fos); 
 					
 				    osw.write(writer.toString());
@@ -131,7 +132,10 @@ public class DokoXMLClass {
 	    		    fos.flush();
 	    		    osw.close();
 	    		    fos.close();
-		            return true;
+	    		    if (oldFilename != null) {
+	    		    	c.deleteFile(oldFilename);
+	    		    }
+	    		    return true;
     	         }	
     	         catch(Exception e){
     	        	 Log.d(TAG,e.toString());
@@ -143,7 +147,7 @@ public class DokoXMLClass {
     	return false;
     }
 	
-	public static GameClass restoreGameStateFromXML(Context c) {
+	public static GameClass restoreGameStateFromXML(Context c,String filePath) {
 		int mPID = 0;
 		int mPreID = 1; // 0 = show state
 		int mPlayerCnt = 0, mPreRoundCnt = 0, mBockCount = -1, mActivePlayers = 0, mBockRoundLimit = 0;
@@ -151,7 +155,7 @@ public class DokoXMLClass {
 		Float mPoints = (float) 0.0;
 		String mName = "";
 		
-		GameClass mGame = new GameClass();
+		GameClass mGame = new GameClass(filePath);
 		
 		ArrayList<PlayerClass> mPlayers = new ArrayList<PlayerClass>();
 		ArrayList<RoundClass> mPreRounds = new ArrayList<RoundClass>();
@@ -164,7 +168,7 @@ public class DokoXMLClass {
 		Document doc;
 		
 		try{
-			FileInputStream in = c.openFileInput(XML_GAME_STATE);
+			FileInputStream in = c.openFileInput(filePath);
 			
 			db = dbf.newDocumentBuilder();
 			doc = db.parse(in);
@@ -254,7 +258,7 @@ public class DokoXMLClass {
 		
 		mGame.getRoundList().add(new RoundClass(0,0,0));
 		for(int i=0;i<mPlayers.size();i++){
-			mPlayers.get(i).updatePoints((float)0);
+			mPlayers.get(i).updatePoints(0,(float)0);
 		}
 		
 		mGame.setActivePlayerCount(mActivePlayers);
@@ -262,8 +266,6 @@ public class DokoXMLClass {
 		mGame.setBockRoundLimit(mBockRoundLimit);
 		mGame.setGameDataFromRestore(mPlayers, mPreRounds);
 		mGame.setGameCntVariant(mGameCntVariant);
-		
-
 		
 		return mGame;
 	}

@@ -4,7 +4,8 @@
     <string name="app_name">Doppelkopf</string>
     <string name="app_version">v2.3</string>  
     <string name="start_action_about">Über diese App</string>
-    <string name="start_action_load_save_game">Vorheriges Spiel starten</string> 
+    <string name="start_action_load_save_game">Vorheriges Spiel starten</string>
+    <string name="str_saved_game">Gespeicherte Spiele</string> 
     <string name="action_about">Über diese App</string>  
     <string name="str_new_game">Neues Spiel erstellen</string>
     <string name="str_start_fun">Doppelkopf</string>
@@ -25,6 +26,8 @@
     <string name="str_edit_round_abort_q">Runde bearbeiten abbrechen?</string>
     <string name="str_edit_round_not_possible">Diese Runde kann nicht bearbeitet werden</string>
     <string name="str_edit_round_info">Runde bearbeiten durch langes Drücken des Rundeneintrages</string>
+    <string name="str_edit_round_finish">Runde erfolgreich geändert</string>
+    <string name="str_edit_round_error">Fehler: Runde konnte nicht geändert!</string>
     <string name="str_active_player">Aktive Spieler</string>
     <string name="str_bock_limit">Limit Bock</string>
     <string name="str_bock">Bock</string>
@@ -57,6 +60,8 @@
     <string name="str_game_switch_list_view">Wechsle Ansicht</string>
     <string name="str_error_game_new_round_data">Ungültige Werte. Bitte Punkte, Anzahl Gewinner/(Ausgesetzt) prüfen</string>
         
+    <string name="str_filename">Dateiname</string>
+    <string name="str_file">Datei</string>
     <string name="str_error_exit">Schwere Fehler</string>
     <string name="str_exit_game">Spiel beenden</string>
     <string name="str_exit_game_q">Möchten Sie das Spiel wirklich beenden?</string>

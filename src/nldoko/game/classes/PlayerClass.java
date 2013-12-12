@@ -9,12 +9,15 @@ public class PlayerClass implements Serializable  {
 	private String mName;
 	private int mID;
 	private float mCurrentPoints;
+	private float mStartPoints;
 	private boolean mIsActive = false;
 	private ArrayList<Float> mPointHistroy = new ArrayList<Float>();
+	private ArrayList<Float> mPointHistroyPerRound = new ArrayList<Float>();
 	
 	
 	public PlayerClass(){
 		this.mCurrentPoints	= 0;
+		this.mStartPoints = 0;
 		this.mName = "";
 	}
 	
@@ -23,12 +26,14 @@ public class PlayerClass implements Serializable  {
 	public PlayerClass(int id){
 		this.mID 	= id;
 		this.mCurrentPoints	= 0;
+		this.mStartPoints = 0;
 		this.mName = "";
 	}
 	
-	public PlayerClass(int id, String name, float points){
+	public PlayerClass(int id, String name, float startPoints){
 		this.mID 	= id;
-		this.mCurrentPoints	= points;
+		this.mCurrentPoints	= startPoints;
+		this.mStartPoints = startPoints;
 		this.mName = name;
 	}
 	
@@ -58,10 +63,17 @@ public class PlayerClass implements Serializable  {
 		this.mName = n;
 	}
 	
-	public void updatePoints(Float p){
-		Float i = mCurrentPoints +p;
-		this.mCurrentPoints = i;
-		this.mPointHistroy.add(i);
+	public void updatePoints(int pos, Float p){
+		if (pos < getPointHistoryPerRoundLength()) {
+			// update existing round
+			changePointsForRound(pos, p);
+		} else {
+			// points for a new round
+			Float i = mCurrentPoints + p;
+			this.mPointHistroy.add(i);
+			this.mPointHistroyPerRound.add(p);
+			this.calculateCurrentPoints();
+		}
 	}
 	
 	public float getPoints(){
@@ -74,6 +86,33 @@ public class PlayerClass implements Serializable  {
 	
 	public int getPointHistoryLength(){
 		return this.mPointHistroy.size();
+	}
+	
+	public float getPointHistoryPerRound(int pos){
+		return this.mPointHistroyPerRound.get(pos);
+	}
+	
+	public int getPointHistoryPerRoundLength(){
+		return this.mPointHistroyPerRound.size();
+	}
+	
+	public void changePointsForRound(int pos, float newPoints) {
+		mPointHistroyPerRound.set(pos, newPoints);
+		if (pos == 0){
+			mPointHistroy.set(pos,newPoints);
+		} else {
+			mPointHistroy.set(pos, mPointHistroy.get(pos-1) + newPoints);
+		}
+		this.calculateCurrentPoints();
+	}
+	
+	private void calculateCurrentPoints() {
+		float sum = 0;
+		for (float points : mPointHistroyPerRound) {
+			sum += points;
+		}
+		sum += mStartPoints;
+		mCurrentPoints = sum;
 	}
 	
 }
