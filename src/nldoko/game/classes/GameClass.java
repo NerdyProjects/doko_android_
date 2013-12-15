@@ -72,6 +72,10 @@ public class GameClass  implements Serializable{
 		return this.mPlayers.get(pos);
 	}
 	
+	public ArrayList<PlayerClass> getPlayers(){
+		return this.mPlayers;
+	}
+	
 
 	public void addRound(RoundClass round){
 		this.mRoundList.add(round);

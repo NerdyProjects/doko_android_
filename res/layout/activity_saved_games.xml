@@ -6,6 +6,7 @@
     android:descendantFocusability="beforeDescendants"
 	android:focusableInTouchMode="true"
 	android:id="@+id/saved_game_layout"
+	android:padding="5dp"
     tools:context=".NewGameActivity" >
 
     <ScrollView

@@ -5,7 +5,11 @@
     <string name="app_version">v2.3</string>  
     <string name="start_action_about">Über diese App</string>
     <string name="start_action_load_save_game">Vorheriges Spiel starten</string>
-    <string name="str_saved_game">Gespeicherte Spiele</string> 
+    <string name="str_saved_game">Gespeicherte Spiele</string>
+    <string name="str_saved_game_delete_all">Spiele löschen</string>
+     <string name="str_saved_game_delete">Spiel löschen</string>
+    <string name="str_saved_game_delete_all_q">Sind Sie sicher das sie ALLE gespeicherten Spiele löschen möchten?</string>
+    <string name="str_saved_game_delete_q">Sind Sie sicher das sie das gespeicherte Spiele löschen möchten?</string>  
     <string name="action_about">Über diese App</string>  
     <string name="str_new_game">Neues Spiel erstellen</string>
     <string name="str_start_fun">Doppelkopf</string>
@@ -59,7 +63,9 @@
     <string name="str_game_points_choose_bock">Neue Bockrunden</string>
     <string name="str_game_switch_list_view">Wechsle Ansicht</string>
     <string name="str_error_game_new_round_data">Ungültige Werte. Bitte Punkte, Anzahl Gewinner/(Ausgesetzt) prüfen</string>
-        
+       
+    <string name="str_delete_file">Datei löschen</string>
+    <string name="str_delete_files">Dateien löschen</string>
     <string name="str_filename">Dateiname</string>
     <string name="str_file">Datei</string>
     <string name="str_error_exit">Schwere Fehler</string>

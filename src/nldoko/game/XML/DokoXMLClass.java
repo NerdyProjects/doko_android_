@@ -188,7 +188,7 @@ public class DokoXMLClass {
 				mNode = mNodes.item(i);
 				if(mNode.getNodeType() != Node.ELEMENT_NODE) continue;
 				
-				Log.d(TAG,i+"#"+mNode.getTextContent());
+				//Log.d(TAG,i+"#"+mNode.getTextContent());
 				
 				if(mNode.getNodeName().equalsIgnoreCase("PlayerCnt")) mPlayerCnt = Integer.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("ActivePlayers")) mActivePlayers = Integer.valueOf(mNode.getTextContent());
@@ -240,7 +240,7 @@ public class DokoXMLClass {
 		for(int i=mPlayers.size();i<DokoData.MAX_PLAYER;i++) mPlayers.add(new PlayerClass(i,"",0));
 		
 		//For Debug
-		Log.d(TAG,mPlayers.size()+"-"+mActivePlayers+"-"+mBockRoundLimit+"-"+mPreRounds.size());
+		//Log.d(TAG,mPlayers.size()+"-"+mActivePlayers+"-"+mBockRoundLimit+"-"+mPreRounds.size());
 		/*
 		for(int k=0;k<mPlayers.size();k++){
 			Log.d(TAG,"Player: "+mPlayers.get(k).getName()+" - points:"+mPlayers.get(k).getPoints());
@@ -254,7 +254,7 @@ public class DokoXMLClass {
 		
 		if(mPlayers.size() != DokoData.MAX_PLAYER)  Log.d(TAG,"File incorecct (XML)");
 		
-		Log.d(TAG,"XML OK - Start Game");
+		//Log.d(TAG,"XML OK");
 		
 		mGame.getRoundList().add(new RoundClass(0,0,0));
 		for(int i=0;i<mPlayers.size();i++){
