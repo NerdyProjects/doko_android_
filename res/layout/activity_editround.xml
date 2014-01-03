@@ -84,44 +84,6 @@
 	                layout="@layout/categorie_header_with_icon_small" />
 	        </LinearLayout>
 	
-	        <LinearLayout
-	            android:id="@+id/game_add_round_bock_container"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_marginTop="10dp" >
-	
-	            <TextView
-	                android:id="@+id/textView2"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:gravity="center"
-	                android:text="@string/str_game_points_choose_bock"
-	                android:textAppearance="?android:attr/textAppearanceMedium" />
-	
-	            <RadioGroup
-	                android:id="@+id/game_add_round_bock_radio"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_marginLeft="20dp"
-	                android:orientation="horizontal" >
-	
-	                <RadioButton
-	                    android:id="@+id/game_add_round_bock_radio_yes"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:text="@string/str_yes"
-	                    android:textStyle="bold" />
-	
-	                <RadioButton
-	                    android:id="@+id/game_add_round_bock_radio_no"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:checked="true"
-	                    android:text="@string/str_no"
-	                    android:textStyle="bold" />
-	            </RadioGroup>
-	        </LinearLayout>
-	
 	        <Button
 	            android:id="@+id/btn_game_edit_round"
 	            android:layout_width="fill_parent"

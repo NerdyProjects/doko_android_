@@ -152,12 +152,12 @@ public class EditRoundActivity extends Activity {
 			mTvAddRoundBockPoints.setVisibility(View.VISIBLE);
 		}
 		
-		mNewRoundBockRadioGroup = (RadioGroup)rootView.findViewById(R.id.game_add_round_bock_radio);
+		/*mNewRoundBockRadioGroup = (RadioGroup)rootView.findViewById(R.id.game_add_round_bock_radio);
 		mRNewRoundBockYes = (RadioButton)rootView.findViewById(R.id.game_add_round_bock_radio_yes);
 		mRNewRoundBockNo = (RadioButton)rootView.findViewById(R.id.game_add_round_bock_radio_no);
 		mNewRoundBockRadioGroup.setEnabled(false);
 		mRNewRoundBockYes.setEnabled(false);
-		mRNewRoundBockNo.setEnabled(false);
+		mRNewRoundBockNo.setEnabled(false);*/
 		
 		mGv = (GridView)rootView.findViewById(R.id.game_add_round_point_grid);
 		mGv.setAdapter(new GameAddNewRoundPointGridAdapter(rootView.getContext(),mEtNewRoundPoints));
@@ -172,8 +172,10 @@ public class EditRoundActivity extends Activity {
 			mTv.setText(rootView.getResources().getString(R.string.str_game_points_choose_winner));
 	
 		mLayout = (LinearLayout)rootView.findViewById(R.id.game_add_round_bock_container);
-		if(mBockRound == 0) mLayout.setVisibility(View.INVISIBLE);
-		else mLayout.setVisibility(View.VISIBLE);
+		if (mLayout != null) {
+			if(mBockRound == 0) mLayout.setVisibility(View.INVISIBLE);
+			else mLayout.setVisibility(View.VISIBLE);
+		}
 		
 		
 		rootView.findViewById(R.id.game_edit_round_main_layout).requestFocus();
@@ -200,10 +202,14 @@ public class EditRoundActivity extends Activity {
 			mTv.setOnClickListener(mPlayernameClickListener);
 			if(mPlayerCnt-mActivePlayers > 0) mTv.setOnLongClickListener(mPlayernameLongClickListener);
 			mRoundPlayer.add(mTv);
-			if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.WIN_STATE)
+			
+			if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.WIN_STATE) {
+				Log.d(TAG,"win state click");
 				mTv.performClick();	
-			else if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE)
-				mTv.performLongClick();
+			} else if(mPlayerStates.get(i*2) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE) {
+				Log.d(TAG,"suspend state long click");
+				mTv.performLongClick();	
+			}
 			
 			mTv = (TextView)mLl.findViewById(R.id.game_add_round_playername_right);
 			
@@ -221,7 +227,7 @@ public class EditRoundActivity extends Activity {
 					Log.d(TAG,"win state click");
 					mTv.performClick();	
 				} else if(mPlayerStates.get(i*2+1) == PLAYER_ROUND_RESULT_STATE.SUSPEND_STATE) {
-					Log.d(TAG,"lose state long click");
+					Log.d(TAG,"suspend state long click");
 					mTv.performLongClick();	
 				}
 			}
@@ -333,7 +339,7 @@ public class EditRoundActivity extends Activity {
 				
 		    	Intent i = intent;
 		    	i.putExtra(DokoData.CHANGE_ROUND_KEY, true);
-		    	i.putExtra(DokoData.ROUND_POINTS_KEY, getNewRoundPoints() * (mBockRound + 1));
+		    	i.putExtra(DokoData.ROUND_POINTS_KEY, getNewRoundPoints());
 		    	
 				PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
 				for(int k=0; k < mPlayerCnt; k++){
