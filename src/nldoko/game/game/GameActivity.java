@@ -78,7 +78,7 @@ public class GameActivity extends FragmentActivity  {
 	private TextView mTvPlayerCnt;
 	private static TextView mTvAddRoundBockPoints;
 	private static LayoutInflater mInflater;
-	private int mPlayerCnt = DokoData.MIN_PLAYER;
+	private int mPlayerCnt;
 	private Spinner mSpActivePlayer;
 	private Spinner mSpBockLimit;
 	
@@ -119,14 +119,16 @@ public class GameActivity extends FragmentActivity  {
         mActionBar = getActionBar();
         mActionBar.show();
         mActionBar.setTitle(getResources().getString(R.string.str_game));
-        
+
         mGame = getGame(savedInstanceState);
         
         if(mGame == null){
         	Toast.makeText(this, getResources().getString(R.string.str_error_game_start), Toast.LENGTH_LONG).show();
         	finish();
         }
-                  
+            
+        mPlayerCnt = mGame.getPlayerCount();
+       
         loadSwipeViews();
  
         mAddRoundPlayernameClickListener = new GameAddRoundPlayernameClickListener();
@@ -868,11 +870,11 @@ public class GameActivity extends FragmentActivity  {
         int mTmpWinnerList[] = new int[DokoData.MAX_PLAYER];
         int mTmpSuspendList[] = new int[DokoData.MAX_PLAYER];
 		PLAYER_ROUND_RESULT_STATE mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.WIN_STATE;
-		Log.d("GA before",mGame.toString());
+		
     	if(data != null) extras = data.getExtras();
     	if(extras != null && extras.getBoolean(DokoData.CHANGE_ROUND_KEY,false)){
     		mNewRoundPoints = extras.getInt(DokoData.ROUND_POINTS_KEY,0);
-    		
+    		//Log.d("GA before",mGame.toString() + " new points:"+mNewRoundPoints);
     		int mTmpState;
         	for(int k=0; k<mPlayerCnt; k++){
         		mTmpState = extras.getInt(DokoData.PLAYERS_KEY[k]+"_STATE",-1);
@@ -883,6 +885,7 @@ public class GameActivity extends FragmentActivity  {
         			mTmpWinnerList[k] = 0; // lose default
         			mTmpSuspendList[k] = 0; // not suspending  default
         			mPlayerRoundState = PLAYER_ROUND_RESULT_STATE.valueOf(mTmpState);
+        			//Log.d("GA EDIT:","player:"+mGame.getPlayer(k).getName()+" with state: "+mPlayerRoundState+", plcnt:"+mPlayerCnt);
         			switch (mPlayerRoundState) {
 						case WIN_STATE: mTmpWinnerList[k] = 1;	break;
 						case SUSPEND_STATE: mTmpSuspendList[k] = 1;	break;
