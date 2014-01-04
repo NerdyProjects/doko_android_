@@ -184,7 +184,7 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 		mRoundPointsSolo = (TextView)v.findViewById(R.id.fragment_game_round_points_solo);
 		
 		
-		if(mRound.getPoints() > 0)mStrHeader.setText(mRound.getRoundTypeAsAtring());
+		if(mRound.getPoints() > 0)mStrHeader.setText(mRound.getRoundTypeAsAtring(mContext));
 		else mStrHeader.setText(null);
 		
 		mRoundNumber.setText("#"+String.valueOf(mRound.getID()+1));

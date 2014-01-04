@@ -2,6 +2,9 @@ package nldoko.game.classes;
 
 import java.io.Serializable;
 
+import android.content.Context;
+
+import nldoko.game.R;
 import nldoko.game.data.DokoData;
 import nldoko.game.data.DokoData.GAME_RESULT_TYPE;
 
@@ -97,16 +100,32 @@ public class RoundClass implements Serializable  {
 		}
 	}
 		
-	public String getRoundTypeAsAtring(){
+	public String getRoundTypeAsAtring(Context c){
+		String res;
 		switch(mRoundType){
 			case LOSE_SOLO:
 			case WIN_SOLO:
-				return DokoData.str_round_type_solo;
+				res = c.getResources().getString(R.string.str_round_type_solo);
+				if (res != null) {
+					return res;
+				} else {
+					return "Solo";
+				}
 			case FIVEPLAYER_2WIN:
 			case FIVEPLAYER_3WIN:
-				return DokoData.str_round_type_3vs2;
+				res = c.getResources().getString(R.string.str_round_type_3vs2);
+				if (res != null) {
+					return res;
+				} else {
+					return "3vs2";
+				}
 			default:
-				return  DokoData.str_round_type_2vs2;
+				res = c.getResources().getString(R.string.str_round_type_2vs2);
+				if (res != null) {
+					return res;
+				} else {
+					return "2vs2";
+				}
 		}
 	}
 }

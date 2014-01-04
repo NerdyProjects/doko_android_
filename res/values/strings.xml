@@ -1,95 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	<!-- english -->
+	
     <string name="app_name">Doppelkopf</string>
-    <string name="app_version">v2.3</string>  
-    <string name="start_action_about">Über diese App</string>
-    <string name="start_action_load_save_game">Vorheriges Spiel starten</string>
-    <string name="str_saved_game">Gespeicherte Spiele</string>
-    <string name="str_saved_game_delete_all">Spiele löschen</string>
-     <string name="str_saved_game_delete">Spiel löschen</string>
-    <string name="str_saved_game_delete_all_q">Sind Sie sicher das sie ALLE gespeicherten Spiele löschen möchten?</string>
-    <string name="str_saved_game_delete_q">Sind Sie sicher das sie das gespeicherte Spiele löschen möchten?</string>  
-    <string name="action_about">Über diese App</string>  
-    <string name="str_new_game">Neues Spiel erstellen</string>
+    <string name="app_version">v2.5</string>  
+    <string name="start_action_about">About this App</string>
+    <string name="start_action_load_save_game">Start last game</string>
+    <string name="str_saved_game">Saved games</string>
+    <string name="str_saved_game_delete_all">Delete all saved game</string>
+     <string name="str_saved_game_delete">Delete saved game</string>
+    <string name="str_saved_game_delete_all_q">Are you sure you want to delete ALL saved games?</string>
+    <string name="str_saved_game_delete_q">Are you sure you want to delete the saved game?</string>  
+    <string name="action_about">About this App</string>  
+    <string name="str_new_game">Create new game</string>
     <string name="str_start_fun">Doppelkopf</string>
-    <string name="str_player">Spieler</string>
-    <string name="str_player_create">Spieler anlegen</string>
-    <string name="str_player_add">Spieler hinzufügen</string>
+    <string name="str_player">Player</string>
+    <string name="str_player_create">Create player</string>
+    <string name="str_player_add">Add player</string>
     <string name="str_number_short">Nr.</string>
     
-    <string name="str_game_settings">Spieleinstellungen</string>
-    <string name="str_change_game_settings">Spieleinstellungen ändern</string>
-    <string name="str_change_game_settings_save">Spieleinstellungen speichern</string>
-    <string name="str_change_game_settings_finish">Spieleinstellungen geändert</string>
-    <string name="str_change_game_settings_save_q">Möchten sie die Spieleinstellungen speichern?</string>
-    <string name="str_change_game_settings_delete_bockrounds">Bockrunden löschen</string>
-    <string name="str_change_game_settings_delete_bockrounds_q">Vorhandene Bockrunden werden überschrieben (gelöscht)</string>    
-    <string name="str_edit_round">Runde bearbeiten</string>
-    <string name="str_edit_round_q">Runde bearbeiten?</string>
-    <string name="str_edit_round_abort_q">Runde bearbeiten abbrechen?</string>
-    <string name="str_edit_round_not_possible">Diese Runde kann nicht bearbeitet werden</string>
-    <string name="str_edit_round_info">Runde bearbeiten durch langes Drücken des Rundeneintrages</string>
-    <string name="str_edit_round_finish">Runde erfolgreich geändert</string>
-    <string name="str_edit_round_error">Fehler: Runde konnte nicht geändert!</string>
-    <string name="str_active_player">Aktive Spieler</string>
-    <string name="str_bock_limit">Limit Bock</string>
+    <string name="str_game_settings">Game settings</string>
+    <string name="str_change_game_settings">Change game settings</string>
+    <string name="str_change_game_settings_save">Save game settings</string>
+    <string name="str_change_game_settings_finish">game settings changed</string>
+    <string name="str_change_game_settings_save_q">Save game settings?</string>
+    <string name="str_change_game_settings_delete_bockrounds">Delete bockround</string>
+    <string name="str_change_game_settings_delete_bockrounds_q">Existing bockrounds will be overwritten (deleted)</string>    
+    <string name="str_edit_round">Edit round</string>
+    <string name="str_edit_round_q">Edit round?</string>
+    <string name="str_edit_round_abort_q">Abort editing round?</string>
+    <string name="str_edit_round_not_possible">You can\'t edit this round</string>
+    <string name="str_edit_round_info">Edit a round with a long press on the round entry</string>
+    <string name="str_edit_round_finish">Round successfully changed</string>
+    <string name="str_edit_round_error">Error: round coudn\'t be changed!</string>
+    <string name="str_active_player">Active players</string>
+    <string name="str_bock_limit">Limit bock</string>
     <string name="str_bock">Bock</string>
-    <string name="str_bockround">Bockrunde</string>
-    <string name="str_bockrounds">Bockrunden</string>
-    <string name="str_bock_preview_on_off">Bockvorschau an/aus</string>
-    <string name="str_bock_preview_not_posible">Bockvorschau nicht vorhanden da das Bocklimit \"0\" ist</string>
+    <string name="str_bockround">Bockround</string>
+    <string name="str_bockrounds">Bockrounds</string>
+    <string name="str_bock_preview_on_off">Bock preview on/off</string>
+    <string name="str_bock_preview_not_posible">Bock preview not available if Bocklimit is \"0\"</string>
     <string name="str_solo">Solo</string>
     <string name="str_solo_special">*Solo*</string>
-    <string name="str_start_game">Spiel starten</string>
-    <string name="str_error_player_name">Ungültiger, gleiche oder fehlender Spielername</string>
-    <string name="str_image">Bild</string>
+    <string name="str_start_game">Start game</string>
+    <string name="str_error_player_name">Invalid, duplication or missing player name</string>
+    <string name="str_image">Image</string>
     <string name="anim_inout">300</string>
     
-    <string name="str_game">Aktuelles Spiel</string>
-    <string name="str_game_cnt_variant">Zählvariante</string>
+    <string name="str_game">Current game</string>
+    <string name="str_game_cnt_variant">Count variant</string>
     <string name="str_game_cnt_variant_normal">Standard</string>
-    <string name="str_game_cnt_variant_lose">Verlierer</string>
-    <string name="str_game_cnt_variant_win">Gewinner</string>
-    <string name="str_game_add_round_here">Neue Runde eintragen (wischen)</string>
-    <string name="str_game_new_round">Neue Runde hinzufügen</string>
-    <string name="str_game_add_new_round">Runde hinzufügen</string>
-    <string name="str_game_round">Runde</string>
-    <string name="str_game_current_round">Aktuelle Runde</string>
-    <string name="str_game_prev_round">Vorherige Runde</string>
-    <string name="str_game_points">Punkte</string>
-    <string name="str_game_points_choose_winner">Wähle: Gewinner(click)</string>
-    <string name="str_game_points_choose_winner_and_suspend">Gewinner (click) + Ausgesetzte/r (long click)</string>
-    <string name="str_game_points_choose_bock">Neue Bockrunden</string>
-    <string name="str_game_switch_list_view">Wechsle Ansicht</string>
-    <string name="str_error_game_new_round_data">Ungültige Werte. Bitte Punkte, Anzahl Gewinner/(Ausgesetzt) prüfen</string>
+    <string name="str_game_cnt_variant_lose">Loser</string>
+    <string name="str_game_cnt_variant_win">Winner</string>
+    <string name="str_game_add_round_here">Add new round (wipe)</string>
+    <string name="str_game_new_round">Add new round</string>
+    <string name="str_game_add_new_round">Add round</string>
+    <string name="str_game_round">Round</string>
+    <string name="str_game_current_round">Current Round</string>
+    <string name="str_game_prev_round">Previous round</string>
+    <string name="str_game_points">Points</string>
+    <string name="str_game_points_choose_winner">Choose: winner (click)</string>
+    <string name="str_game_points_choose_winner_and_suspend">Winner (click) + suspended player(s) (long press)</string>
+    <string name="str_game_points_choose_bock">New bock rounds</string>
+    <string name="str_game_switch_list_view">Change view</string>
+    <string name="str_error_game_new_round_data">Invalid values. Please check points and count of winner/loser/(suspended player)</string>
+    <string name="str_round_type_win_solo">Won solo</string>
+    <string name="str_round_type_lose_solo">Lost solo</string>
+    <string name="str_round_type_solo">Solo</string>
+    <string name="str_round_type_2vs2">2vs2</string>
+    <string name="str_round_type_3vs2">3vs2</string>
        
-    <string name="str_delete_file">Datei löschen</string>
-    <string name="str_delete_files">Dateien löschen</string>
-    <string name="str_filename">Dateiname</string>
-    <string name="str_file">Datei</string>
-    <string name="str_error_exit">Schwere Fehler</string>
-    <string name="str_exit_game">Spiel beenden</string>
-    <string name="str_exit_game_q">Möchten Sie das Spiel wirklich beenden?</string>
-    <string name="str_error_game_start">Fehler: Spiel konnte nicht gestartet werden</string>
-    <string name="str_error_load_game_for_change_game_settings">Fehler: Spieleinstellungen konnten nicht geladen werden</string> 
+    <string name="str_delete_file">Delete file</string>
+    <string name="str_delete_files">Delete files</string>
+    <string name="str_filename">Filename</string>
+    <string name="str_file">File</string>
+    <string name="str_error_exit">Fatal Error</string>
+    <string name="str_exit_game">Quit game</string>
+    <string name="str_exit_game_q">Do really want to quit this game?</string>
+    <string name="str_error_game_start">Error: can\'t start game</string>
+    <string name="str_error_load_game_for_change_game_settings">Error: game settings couldn\'t be loaded</string> 
 
     <string name="str_dp_seperator">:</string>
-    <string name="str_edit">bearbeiten</string>
-    <string name="str_yes">Ja</string>
-    <string name="str_no">Nein</string>
-    <string name="str_accept">Ok</string>
-    <string name="str_abort">Abbrechen</string>
-    <string name="str_close">Schließen</string>
+    <string name="str_edit">edit</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_no">No</string>
+    <string name="str_accept">OK</string>
+    <string name="str_abort">Abort</string>
+    <string name="str_close">Close</string>
     
     <!-- INFO/HELP -->
     <string name="str_info">Info</string>
-    <string name="str_info_cnt_cnt_variants">Zählvarianten</string>
-    <string name="str_info_cnt_cnt_variant_standard">Die Verlierer bekommen Punkte abgezogen, die Gewinner bekommen Punkte hinzu.</string>   
-    <string name="str_info_cnt_cnt_variant_lose">Nur die Verlierer bekommen Punkte abgezogen. Die Punkte der Gewinner &amp; evtl. ausgesetzte Spieler bleiben unverändert. (Umgekehrte Variante Gewinner).</string> 
-    <string name="str_info_cnt_cnt_variant_win">Nur die Gewinner bekommen Punkte dazu. Die Punkte der Verlierer &amp; evtl. ausgesetzte Spieler bleiben unverändert. (Umgekehrte Variante Verlierer).</string>
-    <string name="str_info_active_players_info">Aktive Spieler: Ein Spiel kann mit 5 Spieler gestartet werden und nur 4 aktive Spieler gebene. D.h. jede Runde gibt es einen Spieler der ausetzt (Dieser kann jede Runde frei festgelegt werden).</string> 
-    <string name="str_info_bock_cnt_info">Bei einer Bockrunde werden die Punkte verdoppelt. Bockrundenlimit von 0&#8211;4 einstellbar (0=keine Verdopplung, I = Punkte x2, II = Punkte x4,III = Punkte x8 usw.).</string> 
+    <string name="str_info_cnt_cnt_variants">Count variants</string>
+    <string name="str_info_cnt_cnt_variant_std_name">Standard</string>
+    <string name="str_info_cnt_cnt_variant_win_name">Loser</string>
+    <string name="str_info_cnt_cnt_variant_lose_name">Winner</string>
+    <string name="str_info_cnt_cnt_variant_standard">The losers get points subtracted, winners get points added</string>   
+    <string name="str_info_cnt_cnt_variant_lose">Only the losing players get points subtracted. The points of the winning or suspended players will be untouched. (reverse of count variant winner).</string> 
+    <string name="str_info_cnt_cnt_variant_win">Only the winning player get points added. The points of the losing or suspended players will be untouched. (reverse of count variant loser).</string>
+    <string name="str_info_active_players_info">Active player: You can start a game with 5 players which have only 4 active player. This means that every round 1 player has to be suspended (This player can be set every round individually).</string> 
+    <string name="str_info_bock_cnt_info">On a bock round the round points will be doubled. Bock round limit can bet set between 0&#8211;4 (0=no doubling, I = points x2, II = points x4,III = points x8 etc.).</string> 
     
     <string-array name="infoSettingsDialogEntry1">
     	<item name="title">@string/str_game_cnt_variant_normal</item>
@@ -114,7 +123,7 @@
     
 
 
-    <string name="str_rights">Alle Rechte vorbehalten</string>
+    <string name="str_rights">All rights reserved</string>
     <string name="str_disclaimer">
 		    Disclaimer of Warranty: \nThis Software (Android-Application) are provided on an "as-is" basis, without warranty of any kind, 
 		    including without limitation the warranties of merchantability, fitness for a particular purpose and 

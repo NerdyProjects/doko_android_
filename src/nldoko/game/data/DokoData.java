@@ -41,7 +41,6 @@ public class DokoData {
 		}
 	}
 	
-	
 	public static enum GAME_CNT_VARIANT {
 		CNT_VARIANT_NORMAL,
 		CNT_VARIANT_LOSE,
@@ -66,14 +65,11 @@ public class DokoData {
 			R.id.fragment_game_round_view_table_player_8,
 	};	
 	
-	
-	public static final String str_round_type_win_solo = "Solo gewonnen";
-	public static final String str_round_type_lose_solo = "Solo verloren";
-	public static final String str_round_type_solo = "Solo";
-	public static final String str_round_type_2vs2 = "2vs2";
-	public static final String str_round_type_3vs2 = "3vs2";
-	
-	public static final String[] GAME_CNT_VARAINT_ARRAY  = {"Standard","Verlierer","Gewinner"};
+	// name - description
+	public static final Integer[][] GAME_CNT_VARAINT_ARRAY  = {
+		{R.string.str_info_cnt_cnt_variant_std_name, R.string.str_info_cnt_cnt_variant_standard},
+		{R.string.str_info_cnt_cnt_variant_win_name, R.string.str_info_cnt_cnt_variant_win},
+		{R.string.str_info_cnt_cnt_variant_lose_name, R.string.str_info_cnt_cnt_variant_lose} };
 	
 	
 	public static final String CHANGE_GAME_SETTINGS_KEY = "CHANGE_GAME_SETTINGS";

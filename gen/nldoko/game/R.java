@@ -277,12 +277,15 @@ public final class R {
     public static final class string {
         public static final int action_about=0x7f070009;
         public static final int anim_inout=0x7f07002a;
+        /**  english 
+ german 
+         */
         public static final int app_name=0x7f070000;
         public static final int app_version=0x7f070001;
         public static final int start_action_about=0x7f070002;
         public static final int start_action_load_save_game=0x7f070003;
-        public static final int str_abort=0x7f07004a;
-        public static final int str_accept=0x7f070049;
+        public static final int str_abort=0x7f07004f;
+        public static final int str_accept=0x7f07004e;
         public static final int str_active_player=0x7f07001e;
         public static final int str_bock=0x7f070020;
         public static final int str_bock_limit=0x7f07001f;
@@ -296,12 +299,12 @@ public final class R {
         public static final int str_change_game_settings_finish=0x7f070013;
         public static final int str_change_game_settings_save=0x7f070012;
         public static final int str_change_game_settings_save_q=0x7f070014;
-        public static final int str_close=0x7f07004b;
-        public static final int str_delete_file=0x7f07003c;
-        public static final int str_delete_files=0x7f07003d;
-        public static final int str_disclaimer=0x7f070054;
-        public static final int str_dp_seperator=0x7f070045;
-        public static final int str_edit=0x7f070046;
+        public static final int str_close=0x7f070050;
+        public static final int str_delete_file=0x7f070041;
+        public static final int str_delete_files=0x7f070042;
+        public static final int str_disclaimer=0x7f07005c;
+        public static final int str_dp_seperator=0x7f07004a;
+        public static final int str_edit=0x7f07004b;
         public static final int str_edit_round=0x7f070017;
         public static final int str_edit_round_abort_q=0x7f070019;
         public static final int str_edit_round_error=0x7f07001d;
@@ -309,15 +312,15 @@ public final class R {
         public static final int str_edit_round_info=0x7f07001b;
         public static final int str_edit_round_not_possible=0x7f07001a;
         public static final int str_edit_round_q=0x7f070018;
-        public static final int str_error_exit=0x7f070040;
+        public static final int str_error_exit=0x7f070045;
         public static final int str_error_game_new_round_data=0x7f07003b;
-        public static final int str_error_game_start=0x7f070043;
-        public static final int str_error_load_game_for_change_game_settings=0x7f070044;
+        public static final int str_error_game_start=0x7f070048;
+        public static final int str_error_load_game_for_change_game_settings=0x7f070049;
         public static final int str_error_player_name=0x7f070028;
-        public static final int str_exit_game=0x7f070041;
-        public static final int str_exit_game_q=0x7f070042;
-        public static final int str_file=0x7f07003f;
-        public static final int str_filename=0x7f07003e;
+        public static final int str_exit_game=0x7f070046;
+        public static final int str_exit_game_q=0x7f070047;
+        public static final int str_file=0x7f070044;
+        public static final int str_filename=0x7f070043;
         public static final int str_game=0x7f07002b;
         public static final int str_game_add_new_round=0x7f070032;
         public static final int str_game_add_round_here=0x7f070030;
@@ -337,21 +340,30 @@ public final class R {
         public static final int str_game_switch_list_view=0x7f07003a;
         public static final int str_image=0x7f070029;
         /**  INFO/HELP 
+ INFO/HELP 
          */
-        public static final int str_info=0x7f07004c;
-        public static final int str_info_active_players_info=0x7f070051;
-        public static final int str_info_bock_cnt_info=0x7f070052;
-        public static final int str_info_cnt_cnt_variant_lose=0x7f07004f;
-        public static final int str_info_cnt_cnt_variant_standard=0x7f07004e;
-        public static final int str_info_cnt_cnt_variant_win=0x7f070050;
-        public static final int str_info_cnt_cnt_variants=0x7f07004d;
+        public static final int str_info=0x7f070051;
+        public static final int str_info_active_players_info=0x7f070059;
+        public static final int str_info_bock_cnt_info=0x7f07005a;
+        public static final int str_info_cnt_cnt_variant_lose=0x7f070057;
+        public static final int str_info_cnt_cnt_variant_lose_name=0x7f070055;
+        public static final int str_info_cnt_cnt_variant_standard=0x7f070056;
+        public static final int str_info_cnt_cnt_variant_std_name=0x7f070053;
+        public static final int str_info_cnt_cnt_variant_win=0x7f070058;
+        public static final int str_info_cnt_cnt_variant_win_name=0x7f070054;
+        public static final int str_info_cnt_cnt_variants=0x7f070052;
         public static final int str_new_game=0x7f07000a;
-        public static final int str_no=0x7f070048;
+        public static final int str_no=0x7f07004d;
         public static final int str_number_short=0x7f07000f;
         public static final int str_player=0x7f07000c;
         public static final int str_player_add=0x7f07000e;
         public static final int str_player_create=0x7f07000d;
-        public static final int str_rights=0x7f070053;
+        public static final int str_rights=0x7f07005b;
+        public static final int str_round_type_2vs2=0x7f07003f;
+        public static final int str_round_type_3vs2=0x7f070040;
+        public static final int str_round_type_lose_solo=0x7f07003d;
+        public static final int str_round_type_solo=0x7f07003e;
+        public static final int str_round_type_win_solo=0x7f07003c;
         public static final int str_saved_game=0x7f070004;
         public static final int str_saved_game_delete=0x7f070006;
         public static final int str_saved_game_delete_all=0x7f070005;
@@ -361,7 +373,7 @@ public final class R {
         public static final int str_solo_special=0x7f070026;
         public static final int str_start_fun=0x7f07000b;
         public static final int str_start_game=0x7f070027;
-        public static final int str_yes=0x7f070047;
+        public static final int str_yes=0x7f07004c;
     }
     public static final class style {
         /** 

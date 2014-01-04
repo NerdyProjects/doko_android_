@@ -137,7 +137,18 @@ public class NewGameActivity extends Activity {
    	    
    	    if(mSpActivePlayer.getAdapter().getCount() > mSelction) mSpActivePlayer.setSelection(mSelction);
    	    
-   		mSPGameCntVaraintArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,DokoData.GAME_CNT_VARAINT_ARRAY);
+   	    
+   	    int i = 0;
+   		String[] mGameCntVariantArr  = new String[DokoData.GAME_CNT_VARAINT_ARRAY.length];
+   		for (Integer[] entry : DokoData.GAME_CNT_VARAINT_ARRAY) {
+   			if (entry != null && entry.length == 2) {
+   				String cntName = getResources().getString(entry[0]);
+   				mGameCntVariantArr[i] = cntName;
+   			}
+   			i++;
+   		}
+
+   		mSPGameCntVaraintArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,mGameCntVariantArr);
    	    mSpGameCntVariant.setAdapter(mSPGameCntVaraintArrayAdapter);
    	    
    	 	mSelction = mSpBockLimit.getSelectedItemPosition();
