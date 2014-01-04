@@ -43,6 +43,33 @@ public class InfoSettingsDialog extends CustomDialog {
 	    	View v;
 	    	TextView tV;
 	    	
+	    	// active players
+	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry_header, null);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_header);
+	    	tV.setText(mContext.getResources().getString(R.string.str_active_player));
+	    	mContent.addView(v);
+	    	
+	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry, null);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_title);
+	    	tV.setVisibility(View.GONE);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_text);
+	    	tV.setText(mContext.getResources().getString(R.string.str_info_active_players_info));
+	    	mContent.addView(v);
+	    	
+	    	// bock round
+	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry_header, null);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_header);
+	    	tV.setText(mContext.getResources().getString(R.string.str_bockrounds));
+	    	mContent.addView(v);
+	    	
+	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry, null);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_title);
+	    	tV.setVisibility(View.GONE);
+	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_text);
+	    	tV.setText(mContext.getResources().getString(R.string.str_info_bock_cnt_info));
+	    	mContent.addView(v);
+	    	
+	    	// count varraints
 	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry_header, null);
 	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_header);
 	    	tV.setText(mContext.getResources().getString(R.string.str_info_cnt_cnt_variants));
@@ -64,18 +91,6 @@ public class InfoSettingsDialog extends CustomDialog {
 				}
 	    		mContent.addView(v);
 	    	}
-	    	
-	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry_header, null);
-	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_header);
-	    	tV.setText(mContext.getResources().getString(R.string.str_bockrounds));
-	    	mContent.addView(v);
-	    	
-	    	v = mInflater.inflate(R.layout.info_settings_dialog_entry, null);
-	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_title);
-	    	tV.setVisibility(View.GONE);
-	    	tV = (TextView)v.findViewById(R.id.info_settings_dialog_entry_text);
-	    	tV.setText(mContext.getResources().getString(R.string.str_info_bock_cnt_info));
-	    	mContent.addView(v);
 
 	    }
 	    mDialogTitle = (TextView)findViewById(R.id.info_settings_dialog_header);
