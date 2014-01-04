@@ -612,7 +612,7 @@ public class GameActivity extends FragmentActivity  {
 	
 	private boolean isNewRoundDataOK() {
 		if(getNewRoundPoints() == -1) return false;
-		if(!isWinnerCntOK() || !isSuspendCntOK() ) return false;
+		if(getNewRoundPoints() != 0 && (!isWinnerCntOK() || !isSuspendCntOK())) return false;
 		return true;
 	}
 	
