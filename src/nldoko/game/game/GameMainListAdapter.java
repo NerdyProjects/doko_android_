@@ -139,11 +139,20 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 		else mBockCountInfo.setVisibility(View.GONE);
 		
 		for(int i=0;i<mGame.getPlayerCount();i++){
+			mPoints = mGame.getPlayer(i).getPointHistory(mRound.getID());
 			mPlayerPoints = (TextView)v.findViewById(DokoData.mTvTablePlayerName[i]);
-    		mPoints = mGame.getPlayer(i).getPointHistory(mRound.getID());
+    		
     		mPlayerPoints.setText(Functions.getFloatAsString(mPoints));
     		if(mPoints < 0) mPlayerPoints.setTextColor(parent.getResources().getColor(R.color.red));
     		else mPlayerPoints.setTextColor(parent.getResources().getColor(R.color.green_dark));
+			
+			// if points don't change player was suspended
+			if (mGame.isMarkSuspendedPlayersEnable() &&
+				mRound.getID() > 0 && 
+				mPoints  == mGame.getPlayer(i).getPointHistory(mRound.getID() - 1)) {
+				mPlayerPoints.setTextColor(parent.getResources().getColor(R.color.blue_dark));
+			}
+
     		
 		}
 		v.setOnLongClickListener(mRoundNrLongListerner);
@@ -215,8 +224,9 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 		else mBockCnt.setText(null);
 		//Set player (name,points,state,colors) 
 		mTmp = (int) ((double)mGame.getPlayerCount()/2 + 0.5d);
+		//Log.d("tag","pc:"+mGame.getPlayerCount());
 		
-    	for(int i=0; i< (mGame.getMAXPlayerCount()/mPlayerPerRow)  && i<mTmp; i++){
+    	for(int i=0; i<(mGame.getMAXPlayerCount()/mPlayerPerRow); i++){
     		switch(i){
     			case 0: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row0); break;
     			case 1: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row1); break;
@@ -224,8 +234,9 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     			case 3: mPlayerRow = (LinearLayout)v.findViewById(R.id.fragment_game_round_2_player_row3); break;
     		}
 
-    		if(mPlayerRow == null) return v;
     		
+    		if(mPlayerRow == null) return v;
+    		if (i>=mTmp) mPlayerRow.setVisibility(View.GONE);
     		//Left
     		mPlayerLeftName = (TextView)mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_left_name);
     		mPlayerLeftPoints = (TextView)mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_left_points);
@@ -240,9 +251,21 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
     		if(mRound.getID()>0) mPointsDiff = mPoints - mGame.getPlayer(i*mPlayerPerRow).getPointHistory(mRound.getID()-1);
     		else mPointsDiff = mPoints;
     		
-    		if(mPointsDiff == 0 || mRound.getPoints() == 0) mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.navigation_cancel));
-    		else if(mPointsDiff > 0)mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_green));
-    		else mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_red));
+    		
+    		if(mPointsDiff == 0 || mRound.getPoints() == 0) {
+    			if (mGame.isMarkSuspendedPlayersEnable()) {
+    				mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_left_player).setBackgroundDrawable(v.getResources().getDrawable(R.drawable.select_gray));
+    			}
+    			mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.navigation_cancel));
+    		}
+    		else if(mPointsDiff > 0) {
+    			mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_left_player).setBackgroundDrawable(null);
+    			mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_green));
+    		}
+    		else {
+    			mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_left_player).setBackgroundDrawable(null);
+    			mPlayerLeftRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_red));
+    		}
     		
     		//Right
     		mPlayerRightName = (TextView)mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_right_name);
@@ -268,9 +291,20 @@ public class GameMainListAdapter extends ArrayAdapter<RoundClass> {
 	    		if(mRound.getID()>0) mPointsDiff = mPoints - mGame.getPlayer(i*mPlayerPerRow+1).getPointHistory(mRound.getID()-1);
 	    		else mPointsDiff = mPoints;
 	    		
-	    		if(mPointsDiff == 0 || mRound.getPoints() == 0) mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.navigation_cancel));
-	    		else if(mPointsDiff > 0)mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_green));
-	    		else mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_red));
+	    		if(mPointsDiff == 0 || mRound.getPoints() == 0) {
+	    			if (mGame.isMarkSuspendedPlayersEnable()) {
+	    				mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_right_player).setBackgroundDrawable(v.getResources().getDrawable(R.drawable.select_gray));
+	    			}
+	    			mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.navigation_cancel));
+	    		}
+	    		else if(mPointsDiff > 0) {
+	    			mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_right_player).setBackgroundDrawable(null);;
+	    			mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_green));
+	    		}
+	    		else {
+	    			mPlayerRow.findViewById(R.id.fragment_game_round_2_player_row_player_row_right_player).setBackgroundDrawable(null);
+	    			mPlayerRightRoundState.setImageDrawable(parent.getResources().getDrawable(R.drawable.ic_arrow_up_red));
+	    		}
 			}
     	
     	}

@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="1dp"
     android:id="@+id/fragement_game_round_2_player_row">
 
     <LinearLayout
@@ -12,6 +13,7 @@
         android:weightSum="1">
 
         <LinearLayout
+            android:id="@+id/fragment_game_round_2_player_row_player_row_left_player"
             android:layout_width="0dip"
             android:orientation="horizontal"
             android:layout_height="wrap_content"
@@ -51,6 +53,7 @@
             android:background="@color/gray" />
 
         <LinearLayout
+            android:id="@+id/fragment_game_round_2_player_row_player_row_right_player"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5" >
@@ -86,6 +89,7 @@
 
     <include
         android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         layout="@layout/spacer_gray" />

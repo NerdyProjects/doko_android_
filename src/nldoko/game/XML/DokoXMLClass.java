@@ -75,6 +75,12 @@ public class DokoXMLClass {
     	        serializer.text(game.getGameCntVariant().toString());
     	        serializer.endTag("", "GameCntVariant");
     	        
+    	        serializer.text("\n\t");
+    	        serializer.startTag("", "MarkSuspendedPlayers");
+    	        Log.d(TAG,"boolstr:"+Boolean.valueOf(game.isMarkSuspendedPlayersEnable()).toString()+" bool:"+game.isMarkSuspendedPlayersEnable());
+    	        serializer.text(Boolean.valueOf(game.isMarkSuspendedPlayersEnable()).toString());
+    	        serializer.endTag("", "MarkSuspendedPlayers");
+    	        
   
     	        serializer.text("\n\t");
     	        serializer.startTag("", "Players");
@@ -152,6 +158,7 @@ public class DokoXMLClass {
 		int mPreID = 1; // 0 = show state
 		int mPlayerCnt = 0, mPreRoundCnt = 0, mBockCount = -1, mActivePlayers = 0, mBockRoundLimit = 0;
 		GAME_CNT_VARIANT mGameCntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
+		boolean mMarkSuspendedPlayers = false; // default
 		Float mPoints = (float) 0.0;
 		String mName = "";
 		
@@ -194,6 +201,7 @@ public class DokoXMLClass {
 				else if(mNode.getNodeName().equalsIgnoreCase("ActivePlayers")) mActivePlayers = Integer.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("BockRoundLimit")) mBockRoundLimit = Integer.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("GameCntVariant")) mGameCntVariant = GAME_CNT_VARIANT.valueOf(mNode.getTextContent());
+				else if(mNode.getNodeName().equalsIgnoreCase("MarkSuspendedPlayers")) mMarkSuspendedPlayers = Boolean.valueOf(mNode.getTextContent());
 				else if(mNode.getNodeName().equalsIgnoreCase("Players")){
 					mNodesTmp = mNode.getChildNodes();
 					for(int t=0; t<mNodesTmp.getLength();t++) {
@@ -261,6 +269,7 @@ public class DokoXMLClass {
 			mPlayers.get(i).updatePoints(0,(float)0);
 		}
 		
+		mGame.setMarkSuspendedPlayers(mMarkSuspendedPlayers);
 		mGame.setActivePlayerCount(mActivePlayers);
 		mGame.setPlayerCount(mPlayerCnt);
 		mGame.setBockRoundLimit(mBockRoundLimit);

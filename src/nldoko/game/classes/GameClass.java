@@ -21,8 +21,9 @@ public class GameClass  implements Serializable{
 	private int mPlayerCount;
 	private int mActivePlayerCount;
 	private int mBockRoundLimit;
+	private boolean mMarkSuspendedPlayers;
 	private String mCurrentFilename;
-	
+
 	public GameClass(){
 		setDefaults();
 	}
@@ -32,13 +33,14 @@ public class GameClass  implements Serializable{
 		this.mCurrentFilename = fromFile;
 	}
 	
-	public GameClass(int playerCount, int activePlayer, int bockLimit, GAME_CNT_VARIANT cntVariant){
+	public GameClass(int playerCount, int activePlayer, int bockLimit, GAME_CNT_VARIANT cntVariant, boolean markSuspendedPlayers){
 		this.mPlayers = new ArrayList<PlayerClass>();
 		this.mRoundList = new ArrayList<RoundClass>();
 		this.mPreRoundList = new ArrayList<RoundClass>();
     	this.mPlayerCount = playerCount;
     	this.mActivePlayerCount = activePlayer;    
     	this.mBockRoundLimit = bockLimit;
+    	this.setMarkSuspendedPlayers(markSuspendedPlayers);
     	
     	this.cntVariant = cntVariant;
     	
@@ -56,6 +58,7 @@ public class GameClass  implements Serializable{
     	this.mActivePlayerCount = 0;    
     	this.mBockRoundLimit = 0;
     	this.cntVariant = GAME_CNT_VARIANT.CNT_VARIANT_NORMAL;
+    	this.setMarkSuspendedPlayers(false);
 	}
 	
 	public void setGameDataFromRestore(ArrayList<PlayerClass> playerList, ArrayList<RoundClass> preRoundList){
@@ -76,6 +79,13 @@ public class GameClass  implements Serializable{
 		return this.mPlayers;
 	}
 	
+	public boolean isMarkSuspendedPlayersEnable() {
+		return mMarkSuspendedPlayers;
+	}
+
+	public void setMarkSuspendedPlayers(boolean mMarkSuspendedPlayers) {
+		this.mMarkSuspendedPlayers = mMarkSuspendedPlayers;
+	}
 
 	public void addRound(RoundClass round){
 		this.mRoundList.add(round);
@@ -340,5 +350,6 @@ public class GameClass  implements Serializable{
         mCurrentFilename = formattedDate+DokoData.SAVED_GAME_FILE_POSTFIX;
         return currentFilename();
 	}
+
 		
 }

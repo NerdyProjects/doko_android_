@@ -81,6 +81,7 @@ public class GameActivity extends FragmentActivity  {
 	private int mPlayerCnt;
 	private Spinner mSpActivePlayer;
 	private Spinner mSpBockLimit;
+	private Boolean mMarkSuspendedPlayers;
 	
 	private static RadioGroup mNewRoundBockRadioGroup; 
 	private static Button mBtnAddRound;
@@ -202,14 +203,15 @@ public class GameActivity extends FragmentActivity  {
         	mPlayerCnt 		= extras.getInt(DokoData.PLAYER_CNT_KEY,0);
         	mActivePlayers 	= extras.getInt(DokoData.ACTIVE_PLAYER_KEY,0);
         	mBockLimit		= extras.getInt(DokoData.BOCKLIMIT_KEY,0);
+        	mMarkSuspendedPlayers = extras.getBoolean(DokoData.MARK_SUSPEND_OPTION_KEY,false);
         	mGameCntVaraint = (GAME_CNT_VARIANT)intent.getSerializableExtra(DokoData.GAME_CNT_VARIANT_KEY);
         	
         	if(mPlayerCnt < DokoData.MIN_PLAYER || mPlayerCnt > DokoData.MAX_PLAYER 
         			|| mActivePlayers > mPlayerCnt || mActivePlayers < DokoData.MIN_PLAYER
         			|| (mPlayerCnt == 0 || mActivePlayers == 0))
         		return null;
-        	
-        	mGame = new GameClass(mPlayerCnt, mActivePlayers, mBockLimit,mGameCntVaraint);
+        	Log.d(TAG,"ng:"+mMarkSuspendedPlayers);
+        	mGame = new GameClass(mPlayerCnt, mActivePlayers, mBockLimit, mGameCntVaraint,mMarkSuspendedPlayers);
         	Log.d(TAG,"bl:"+mBockLimit+" - prercnt"+mGame.getPreRoundList().size());
         	for(int k=0;k<mPlayerCnt;k++){
         		//Log.d(TAG,mTmp+"k:"+k);
@@ -220,7 +222,7 @@ public class GameActivity extends FragmentActivity  {
         	}
         }
         else{
-        	mGame = new GameClass(5, 4, 1, GAME_CNT_VARIANT.CNT_VARIANT_NORMAL);
+        	mGame = new GameClass(5, 4, 1, GAME_CNT_VARIANT.CNT_VARIANT_NORMAL,false);
 	    	
         	mGame.getPlayer(0).setName("Johannes");
         	mGame.getPlayer(1).setName("Christoph");

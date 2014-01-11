@@ -1,8 +1,6 @@
 package nldoko.game.start;
 
 import nldoko.game.R;
-import nldoko.game.classes.TypeWriterClass;
-import nldoko.game.game.GameActivity;
 import nldoko.game.game.NewGameActivity;
 import nldoko.game.game.SavedGameListActivity;
 import nldoko.game.information.AboutActivity;

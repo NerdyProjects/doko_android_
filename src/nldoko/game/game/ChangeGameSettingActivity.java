@@ -103,6 +103,7 @@ public class ChangeGameSettingActivity extends Activity {
         	mPlayerCnt = extras.getInt(DokoData.PLAYER_CNT_KEY,0);
         	mActivePlayers =  extras.getInt(DokoData.ACTIVE_PLAYER_KEY,0);
         	mBockLimit = extras.getInt(DokoData.BOCKLIMIT_KEY,0);
+        	boolean mMarkSuspendedPlayers = extras.getBoolean(DokoData.MARK_SUSPEND_OPTION_KEY,false);
         	mGameCntVaraint = (GAME_CNT_VARIANT)intent.getSerializableExtra(DokoData.GAME_CNT_VARIANT_KEY);
         	
         	if(mPlayerCnt < DokoData.MIN_PLAYER || mPlayerCnt > DokoData.MAX_PLAYER 
@@ -110,7 +111,7 @@ public class ChangeGameSettingActivity extends Activity {
         			(mPlayerCnt == 0 || mActivePlayers == 0))
         		return null;
         	
-        	mGame = new GameClass(mPlayerCnt, mActivePlayers, mBockLimit,mGameCntVaraint);
+        	mGame = new GameClass(mPlayerCnt, mActivePlayers, mBockLimit,mGameCntVaraint,mMarkSuspendedPlayers);
         	for(int k=0;k<mPlayerCnt;k++){
         		Log.d(TAG,mTmp+"k:"+k);
         		mTmp = extras.getString(DokoData.PLAYERS_KEY[k],"");

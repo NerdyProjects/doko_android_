@@ -75,6 +75,7 @@ public class DokoData {
 	public static final String CHANGE_GAME_SETTINGS_KEY = "CHANGE_GAME_SETTINGS";
 	public static final String CHANGE_ROUND_KEY			= "CHANGE_ROUND";
 	public static final String PLAYER_CNT_KEY 			= "PLAYER_CNT";
+	public static final String MARK_SUSPEND_OPTION_KEY 	= "MARK_SUSPEND_OPTION";
 	public static final String BOCKLIMIT_KEY 			= "BOCKLIMIT";
 	public static final String BOCKROUND_KEY 			= "BOCKROUND";
 	public static final String ACTIVE_PLAYER_KEY 		= "ACTIVE_PLAYER";

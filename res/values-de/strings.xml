@@ -40,6 +40,7 @@
     <string name="str_bockrounds">Bockrunden</string>
     <string name="str_bock_preview_on_off">Bockvorschau an/aus</string>
     <string name="str_bock_preview_not_posible">Bockvorschau nicht vorhanden da das Bocklimit \"0\" ist</string>
+    <string name="str_mark_suspend">Markiere ausgesetzte</string>
     <string name="str_solo">Solo</string>
     <string name="str_solo_special">*Solo*</string>
     <string name="str_start_game">Spiel starten</string>

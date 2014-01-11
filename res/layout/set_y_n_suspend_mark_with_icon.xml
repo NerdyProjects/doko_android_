@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:id="@+id/fragment_game_set_mark_suspend_entry" >
+
+    <LinearLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:orientation="vertical"
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/str_image"
+            android:scaleType="center"
+            android:src="@drawable/ic_action_labels" />
+
+    </LinearLayout>
+    
+    <View 
+		android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:weightSum="1"
+        android:orientation="horizontal" >
+
+
+           <TextView
+               android:id="@+id/fragment_game_round_str_prim"
+               android:layout_width="0dip"
+               android:layout_height="match_parent"
+               android:paddingLeft="5dp"
+               android:layout_weight="0.85"
+               android:gravity="center|left"
+               android:text="@string/str_mark_suspend"
+               android:textAppearance="?android:attr/textAppearanceMedium"
+               android:textColor="@color/black"
+               android:textStyle="bold" />
+
+           <CheckBox
+               android:id="@+id/cb_suspend"
+            	android:layout_width="0dp"
+            	android:layout_height="wrap_content"
+            	android:layout_weight="0.15"
+                android:text="" />
+
+    </LinearLayout>
+
+</LinearLayout>
